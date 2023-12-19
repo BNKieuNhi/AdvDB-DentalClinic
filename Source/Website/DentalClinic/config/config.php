@@ -1,23 +1,19 @@
-
 <?php
-    $host="localhost";
-    $dbuser="root";
-    $dbpass="";
-    $db="main";
-    
-    try{
-        $conn = mysqli_connect ($host,
-                                $dbuser,
-                                $dbpass,
-                                $db);
-    }
-    catch(mysqli_sql_exception)
-    {
-        echo "Could not connect to database";
-    }
+$serverName = "MSI";
+$connectionOptions = array(
+    "Database" => "QLPKNHAKHOA",
+    "Uid" => "SONGCAT",
+    "PWD" => "SONGCAT"
+);
 
-    if($conn)
-    {
-        ///echo "You are connected!";
-    }
+// Establishes the connection
+$conn = sqlsrv_connect($serverName, $connectionOptions);
+
+// Check the connection
+if (!$conn) {
+    die(print_r(sqlsrv_errors(), true));
+}
+else{
+    //echo "Connected!";
+}
 ?>
