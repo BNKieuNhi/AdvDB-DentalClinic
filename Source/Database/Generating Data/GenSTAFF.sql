@@ -1,0 +1,32 @@
+﻿-- Sử dụng CSDL đã tạo
+USE QLPKNHAKHOA
+GO
+--
+-- Delete data from the table 'dbo.STAFF'
+--
+DELETE STAFF
+GO
+--
+-- Inserting data into table into STAFF
+--
+INSERT into STAFF(ID_Staff) VALUES (21)
+INSERT into STAFF(ID_Staff) VALUES (22)
+INSERT into STAFF(ID_Staff) VALUES (23)
+INSERT into STAFF(ID_Staff) VALUES (24)
+INSERT into STAFF(ID_Staff) VALUES (25)
+INSERT into STAFF(ID_Staff) VALUES (26)
+INSERT into STAFF(ID_Staff) VALUES (27)
+INSERT into STAFF(ID_Staff) VALUES (28)
+INSERT into STAFF(ID_Staff) VALUES (29)
+INSERT into STAFF(ID_Staff) VALUES (30)
+INSERT into STAFF(ID_Staff) VALUES (31)
+INSERT into STAFF(ID_Staff) VALUES (32)
+INSERT into STAFF(ID_Staff) VALUES (33)
+INSERT into STAFF(ID_Staff) VALUES (34)
+INSERT into STAFF(ID_Staff) VALUES (35)
+INSERT into STAFF(ID_Staff) VALUES (36)
+INSERT into STAFF(ID_Staff) VALUES (37)
+INSERT into STAFF(ID_Staff) VALUES (38)
+INSERT into STAFF(ID_Staff) VALUES (39)
+INSERT into STAFF(ID_Staff) VALUES (40)
+GO
