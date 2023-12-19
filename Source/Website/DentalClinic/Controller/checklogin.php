@@ -2,51 +2,93 @@
     session_start();
     include("../config/config.php");
     $count = 0;
-    if(isset($_POST['email']) && isset($_POST['password']))
-    {
-        $email=$_POST['email'];
-        $password=$_POST['password'];
-
-        $email = stripslashes($email);
-        $password = stripslashes($password);
-
-        $sql="SELECT * FROM users WHERE email='$email' and password='$password'";
-        $result = mysqli_query($conn, $sql);
-
-        $row=mysqli_fetch_array($result);
-
-        $_SESSION['role'] = $row['role'];
-
-        $count=mysqli_num_rows($result);
-    }
-    else
-    {
-        echo "Username/password should not be empty!";
-    }
-
-    if($count > 0){
-
-        $_SESSION['email'] = $email;
-        $_SESSION['password'] = $password;
-
-        if ($_SESSION['role'] == "Admin")
+    if(isset($_POST['btn-login']))
+    {    
+        if(!empty(trim($_POST['username'])) && !empty(trim($_POST['password'])))
         {
-            header("location: ../Admin UI/adminHomepage.php");
-        }
-        elseif ($_SESSION['role'] == "Staff")
-        {
-            header("location: ../Staff UI/staffHomepage.php");
+            $username=$_POST['username'];
+            $password=$_POST['password'];
+
+            $username = stripslashes($username);
+            $password = stripslashes($password);
+
+            $sql="SELECT * FROM ACCOUNT WHERE username='$username' and pass_word='$password'";
+            $stmt = sqlsrv_query($conn, $sql);
+
+            if(!$stmt)
+            {
+                $_SESSION['status'] = 'Wrong Username or Password. Please enter again';
+                header("location: ../login.php");
+                exit(0);               
+            }
+            elseif(sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)['isActive'] == 'No')
+            {
+                $_SESSION['status'] = 'Your account has been banned!';
+                header("location: ../login.php");
+                exit(0); 
+            }
+            else
+            {
+                $sql="SELECT * FROM USER_DENTAL WHERE username='$username'";
+                $stmt = sqlsrv_query($conn, $sql);
+                $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+
+                if(sqlsrv_num_rows($stmt) != 1)
+                {
+                    $count=sqlsrv_num_rows($stmt);
+                    $_SESSION['authenticated'] = true;
+
+                    $_SESSION['auth_user'] = 
+                    [
+                        'id' => $row['ID_User'],
+                        'username' => $row['Username'],
+                        'fullname' => $row['Fullname'],
+                        'gender' => $row['Gender'],
+                        'phone' => $row['PhoneNumber'],
+                        'address' => $row['CurrAddress'],
+                        'role' => $row['UserType'],
+                    ];
+            
+                    switch($_SESSION['auth_user']['role'])
+                    {
+                        case 'Admin':
+                            header("location: ../MainUI//AdminUI/dashboard.php");
+                            exit(0);
+                        //case "Dentist":
+                        case "Nha si":
+                            header("location: ../MainUI/DentistUI/dentistHomepage.php");
+                            exit(0);
+                        //case "Staff":
+                        case "Nhan vien":
+                            header("location: ../MainUI//StaffUI/dashboard.php");
+                            exit(0);
+                        default:
+                            echo $_SESSION['auth_user']['role'];
+                            $_SESSION['status'] = 'Error when directing...Please try again!';
+                            header("location: ../login.php");
+                            exit(0);
+                    }
+                }
+                else
+                {
+                    $_SESSION['status'] = 'No user found in USER_DENTAL.';
+                    header("location: ../login.php");
+                    exit(0);
+                }
+            }
         }
         else
         {
-            header("location: ../Customer UI/customerHomepage.php");
+            $_SESSION['status'] = 'All fields must be filled in.';
+            header("location: ../login.php");
+            exit(0);
         }
-        $_SESSION['errLogin'] = "";
     }
-    else {
+    else
+    {
+        $_SESSION['status'] = 'Please click login button!';
         header("location: ../login.php");
-        $_SESSION['email'] = "";
-        $_SESSION['password'] = "";
-        $_SESSION['errLogin'] = "yes";
+        exit(0);
     }
+
 ?>
