@@ -33,6 +33,21 @@ require_once('./partials/_head.php');
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
+                                            <label for="" class="form-col__label">Username</label>
+                                            <input type="text" name="user_name" class="form-control" value="LJCH-7436">
+                                        </div>
+                                        <div class="form-col">
+                                            <label for="" class="form-col__label">Password</label>
+                                            <input type="text" name="password" class="form-control" value="LJCH-7436">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="navbar__divider">
+
+                                <div class="form-row">
+                                    <div class="form-row__flex">
+                                        <div class="form-col">
                                             <label for="" class="form-col__label">Dentist Name</label>
                                             <input type="text" name="dentist_name" class="form-control" value="LJCH-7436">
                                         </div>
