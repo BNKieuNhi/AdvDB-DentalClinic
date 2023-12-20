@@ -1,5 +1,5 @@
 <?php
-    $page_title = "Smile - Staff List";
+    $page_title = "Smile - Medicine List";
     require_once('./partials/_head.php');
 
     $pageSize = 100;
@@ -71,7 +71,7 @@
                                     <tr>
                                         <th class="text-column-emphasis" scope="col">Medicine Id</th> 
                                         <th class="text-column" scope="col">Medicine Name</th> 
-                                        <th class="text-column" scope="col">Price</th> 
+                                        <th class="text-column" scope="col">Price ($)</th> 
                                         <th class="text-column" scope="col">Action</th> 
                                     </tr>
                                 </thead>
