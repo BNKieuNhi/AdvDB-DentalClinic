@@ -3,8 +3,10 @@
 // include('config/config.php');
 // include('config/checklogin.php');
 // check_login();
+$page_title = "Smile - Staff List";
 require_once('./partials/_head.php');
 // require_once('./partials/_analytics.php');
+$appointments = getAll('APPOINTMENT');
 ?>
 
 <body>
@@ -42,29 +44,47 @@ require_once('./partials/_head.php');
                             <table class="table">
                                 <thead class="thead-light"> 
                                     <tr>
-                                        <th class="text-column-emphasis" scope="col">Appointment Id</th> 
+                                        <th class="text-column-emphasis" scope="col">Id</th> 
                                         <th class="text-column" scope="col">Dentist</th> 
                                         <th class="text-column" scope="col">Customer</th> 
                                         <th class="text-column" scope="col">Room</th> 
-                                        <th class="text-column" scope="col">Date</th> 
-                                        <th class="text-column" scope="col">Time</th> 
+                                        <!-- <th class="text-column" scope="col">Date</th>  -->
+                                        <!-- <th class="text-column" scope="col">Time</th>  -->
                                         <th class="text-column" scope="col">Status</th> 
                                         <th class="text-column" scope="col">ACTIONS</th> 
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
+                                <?php
+                                    $count = sizeof($appointments['data']);
+                                    //echo $appointments['data'];
+                                    if($count > 0)
+                                    {
+                                    ?>
+                                        <?php  foreach($appointments['data'] as $appointment) 
+                                        {  
+                                        ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row">5762</th> 
-                                        <th class="text-column" scope="row">FCWU-5762</th> 
-                                        <th class="text-column" scope="row">FCWU-5762</th> 
-                                        <th class="text-column" scope="row">R01</th> 
-                                        <th class="text-column" scope="row">12/02/2023</th> 
-                                        <th class="text-column" scope="row">12:30</th> 
-                                        <th class="text-column" scope="row">
-                                            <span class="badge badge-success">Mới</span>
-                                            <!-- <span class="badge badge-unsuccess">Tái khám</span> -->
-                                        </th> 
-
+                                        <th class="text-column-emphasis" scope="row"><?php echo $appointment['ID_Appointment']?></th>
+                                        <th class="text-column" scope="row"><?php echo $appointment['ID_Dentist']?></th>
+                                        <th class="text-column" scope="row"><?php echo $appointment['ID_Customer']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $appointment['ID_Room']?></th> 
+                                        <?php if($appointment['Status_appt'] = 'New')
+                                            {?>
+                                            <th class="text-column" scope="row">
+                                                <span class="badge badge-success">New</span>
+                                            </th> 
+                                            <?php
+                                            }
+                                            else
+                                            {
+                                            ?>
+                                            <th class="text-column" scope="row">
+                                                <span class="badge badge-unsuccess">Reassess</span>
+                                            </th> 
+                                            <?php
+                                            }
+                                        ?>
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
                                                 <button class="btn-control btn-control-delete" name="btn-delete">
@@ -78,6 +98,15 @@ require_once('./partials/_head.php');
                                             </div>
                                         </th> 
                                     </tr>
+                                    <?php
+                                        }
+                                    }
+                                    else
+                                    {?>
+                                       <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                    <?php    
+                                    }
+                                    ?>                                
                                 </tbody>
                             </table>
 
