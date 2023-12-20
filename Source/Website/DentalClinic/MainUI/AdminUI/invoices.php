@@ -3,8 +3,9 @@
 // include('config/config.php');
 // include('config/checklogin.php');
 // check_login();
+$page_title = "Smile - Staff List";
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
+$invoices = getAll('INVOICE');
 ?>
 
 <body>
@@ -42,29 +43,30 @@ require_once('./partials/_head.php');
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th class="text-column-emphasis" scope="col">Invoice Id</th> 
+                                        <th class="text-column-emphasis" scope="col">Id</th> 
                                         <th class="text-column" scope="col">Select Treatment</th> 
                                         <th class="text-column" scope="col">Payment Id</th> 
-                                        <!-- <th class="text-column" scope="col">Tooth Price</th>  -->
-                                        <!-- <th class="text-column" scope="col">Medicine Price</th>  -->
                                         <th class="text-column" scope="col">Total ($)</th> 
-                                        <!-- <th class="text-column" scope="col">Amount Paid</th>  -->
-                                        <!-- <th class="text-column" scope="col">Change</th>  -->
-                                        <th class="text-column" scope="col">Time</th> 
+                                        <!-- <th class="text-column" scope="col">Time</th>  -->
                                         <th class="text-column" scope="col">ACTIONS</th> 
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
+                                <?php
+                                    $count = sizeof($invoices['data']);
+                                    //echo $invoices['data'];
+                                    if($count > 0)
+                                    {
+                                    ?>
+                                        <?php  foreach($invoices['data'] as $invoice) 
+                                        {  
+                                        ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row">731</th> 
-                                        <th class="text-column" scope="row">2</th> 
-                                        <th class="text-column" scope="row">1</th> 
-                                        <!-- <th class="text-column" scope="row">$11</th>  -->
-                                        <!-- <th class="text-column" scope="row">$20</th>  -->
-                                        <th class="text-column" scope="row">31</th> 
-                                        <!-- <th class="text-column" scope="row">$31</th>  -->
-                                        <!-- <th class="text-column" scope="row">$0</th>  -->
-                                        <th class="text-column" scope="row">04/12/2022 11:37</th> 
+                                        <th class="text-column-emphasis" scope="row"><?php echo $invoice['ID_Invoice']?></th>
+                                        <th class="text-column" scope="row"><?php echo $invoice['ID_Select']?></th>
+                                        <th class="text-column" scope="row"><?php echo $invoice['ID_Payment']?></th>
+                                        <th class="text-column" scope="row"><?php echo $invoice['Total']?></th> 
+
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
                                                 <a href="invoice_detail.php" class="btn-control btn-control-edit">
@@ -74,20 +76,18 @@ require_once('./partials/_head.php');
                                             </div>
                                         </th>
                                     </tr>
+                                    <?php
+                                        }
+                                    }
+                                    else
+                                    {?>
+                                       <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                    <?php    
+                                    }
+                                    ?>
 
                                 </tbody>
                             </table>
 
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer -->
-            <?php 
-            require_once('./partials/_footer.php'); 
-            ?>
-        </div>
-    </div>
-
-</body>
-</html>
+       
