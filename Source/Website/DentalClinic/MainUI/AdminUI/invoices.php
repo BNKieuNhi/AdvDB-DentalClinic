@@ -47,7 +47,7 @@ require_once('./partials/_head.php');
                                         <th class="text-column" scope="col">Payment Id</th> 
                                         <!-- <th class="text-column" scope="col">Tooth Price</th>  -->
                                         <!-- <th class="text-column" scope="col">Medicine Price</th>  -->
-                                        <th class="text-column" scope="col">Total</th> 
+                                        <th class="text-column" scope="col">Total ($)</th> 
                                         <!-- <th class="text-column" scope="col">Amount Paid</th>  -->
                                         <!-- <th class="text-column" scope="col">Change</th>  -->
                                         <th class="text-column" scope="col">Time</th> 
@@ -61,7 +61,7 @@ require_once('./partials/_head.php');
                                         <th class="text-column" scope="row">1</th> 
                                         <!-- <th class="text-column" scope="row">$11</th>  -->
                                         <!-- <th class="text-column" scope="row">$20</th>  -->
-                                        <th class="text-column" scope="row">$31</th> 
+                                        <th class="text-column" scope="row">31</th> 
                                         <!-- <th class="text-column" scope="row">$31</th>  -->
                                         <!-- <th class="text-column" scope="row">$0</th>  -->
                                         <th class="text-column" scope="row">04/12/2022 11:37</th> 
