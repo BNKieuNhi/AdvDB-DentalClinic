@@ -2,7 +2,7 @@
     $page_title = "Smile - Paitent List";
     require_once('./partials/_head.php');
 
-    $pageSize = 100;
+    $pageSize = 20;
     $pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
     $paitents = getAllWithPagination('CUSTOMER', $pageSize, $pageNumber, 'ID_Customer');
