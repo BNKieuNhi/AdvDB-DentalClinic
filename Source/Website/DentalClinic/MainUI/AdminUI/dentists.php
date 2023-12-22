@@ -1,12 +1,11 @@
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 $page_title = "Smile - Dentist List";
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
-$dentists = getbyUserType('USER_DENTAL', 'Dentist');
+
+$pageSize = 20;
+$pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$dentists = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pageNumber, 'ID_User');
 ?>
 
 <body>
@@ -30,6 +29,33 @@ $dentists = getbyUserType('USER_DENTAL', 'Dentist');
                                 <i class="fa-solid fa-user-plus btn-control-icon"></i>
                                 Add new dentist
                             </a>
+                            <div class="pagination">
+                                <?php
+                                    $totalPages = ceil($dentists['total'] / $pageSize);
+                                    $maxPagesToShow = 4;
+                                    $halfMax = floor($maxPagesToShow / 2);
+
+                                    // Hiển thị nút Previous
+                                    if ($pageNumber > 1) {
+                                        echo '<a href="?page=' . ($pageNumber - 1) . '">&laquo;</a>';
+                                    } else {
+                                        echo '<a class="disabled" href="#">&laquo;</a>';
+                                    }
+
+                                    // Hiển thị các nút trang
+                                    for ($i = max(1, $pageNumber - $halfMax); $i <= min($totalPages, $pageNumber + $halfMax); $i++) {
+                                        echo '<a class="' . ($i == $pageNumber ? 'active' : '') . '" href="?page=' . $i . '">' . $i . '</a>';
+                                    }
+
+                                    // Hiển thị nút Next
+                                    if ($pageNumber < $totalPages) {
+                                        echo '<a href="?page=' . ($pageNumber + 1) . '">&raquo;</a>';
+                                    } else {
+                                        echo '<a class="disabled" href="#">&raquo;</a>';
+                                    }
+                                ?>
+                            </div>
+                            
                             <div class="container__heading-search">
                                 <input type="text" class="heading-search__area" placeholder="Search by code, name..." name="search_text">
                                 <button class="btn-control btn-control-search" name="btn-search">
@@ -88,7 +114,7 @@ $dentists = getbyUserType('USER_DENTAL', 'Dentist');
                                                     <i class="fa-solid fa-trash-can btn-control-icon"></i>
                                                     Delete
                                                 </button>
-                                                <a href="update_staffs.php" class="btn-control btn-control-edit">
+                                                <a href="update_dentists.php" class="btn-control btn-control-edit">
                                                     <i class="fa-solid fa-user-pen btn-control-icon"></i>
                                                     Update
                                                 </a>
