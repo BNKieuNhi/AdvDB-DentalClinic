@@ -23,8 +23,8 @@ $appointments = getAllWithPagination('APPOINTMENT', $pageSize, $pageNumber, 'ID_
             <!-- Page content -->
             <div class="container">
                 <div class="container-recent">
-                    <div class="container-recent-inner">
-                        <div class="container-recent__heading">
+                    <form action="" method="POST" class="container-recent-inner">
+                        <div class="container-recent__heading heading__button">
                             <a href="add_appointments.php" class="btn-control btn-control-add">
                                 <i class="fa-regular fa-calendar-plus btn-control-icon"></i>
                                 Add new appointment
@@ -56,14 +56,25 @@ $appointments = getAllWithPagination('APPOINTMENT', $pageSize, $pageNumber, 'ID_
                                     }
                                 ?>
                             </div>
+                            <?php
+                                $strKeyword = null;
 
+                                if(isset($_POST["btn-search"]))
+                                {
+                                    $strKeyword = $_POST["search_text"];
+                                    $appointments = searchByKeyword('APPOINTMENT', 'ID_Dentist', $strKeyword);
+                                }
+                                else
+                                {
+                                    $appointments = getAllWithPagination('APPOINTMENT', $pageSize, $pageNumber, 'ID_Appointment');
+                                }
+                            ?>
                             <div class="container__heading-search">
-                                <input type="text" class="heading-search__area" placeholder="Search by code, name..." name>
+                                <input type="text" class="heading-search__area" placeholder="Search by dentist id" name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
-                                </button>                        
-
+                                </button>      
                             </div>
                         </div>
 
