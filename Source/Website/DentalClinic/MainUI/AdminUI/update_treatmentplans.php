@@ -46,38 +46,8 @@ require_once('./partials/_head.php');
                                         </div>
 
                                         <div class="form-col">
-                                            <label for="" class="form-col__label">Treatment Id</label>
-                                            <select name="treatment_id" id="treatmentId" class="form-cotrol" onchange="getTreatment(this.value)">
-                                                <option value="" class="">1</option>
-                                                <option value="" class="">2</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-col">
                                             <label for="" class="form-col__label">Dentist Id</label>
                                             <select name="dentist_id" id="dentistId" class="form-cotrol" onchange="getDentist(this.value)">
-                                                <option value="" class="">1</option>
-                                                <option value="" class="">2</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr class="navbar__divider">
-
-                                <div class="form-row">
-                                    <div class="form-row__flex">
-                                        <div class="form-col">
-                                            <label for="" class="form-col__label">Tooth Surface</label>
-                                            <select name="surface_id" id="surfaceId" class="form-cotrol" onchange="getTreatment(this.value)">
-                                                <option value="" class="">D</option>
-                                                <option value="" class="">L</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="form-col">
-                                            <label for="" class="form-col__label">Tooth Id</label>
-                                            <select name="tooth_id" id="toothId" class="form-cotrol" onchange="getTreatment(this.value)">
                                                 <option value="" class="">1</option>
                                                 <option value="" class="">2</option>
                                             </select>
@@ -127,6 +97,99 @@ require_once('./partials/_head.php');
                     </div>
                 </div>
             </div>
+
+            <!-- Choose Tooth -->
+            <div class="container">
+                <div class="container-recent">
+                    <div class="container-recent-inner">
+                        <div class="container-recent__heading">
+                            <p class="recent__heading-title">Choose Tooth</p>
+                            <a href="add_choosetooths.php" class="btn-control btn-control-add">
+                                <i class="fa-solid fa-tooth btn-control-icon"></i>
+                                Add tooth
+                            </a>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-column-emphasis" scope="col">Select Id</th> 
+                                        <th class="text-column-emphasis" scope="col">Tooth Id</th> 
+                                        <th class="text-column" scope="col">Surface</th> 
+                                        <th class="text-column" scope="col">Price ($)</th> 
+                                        <th class="text-column" scope="col">Action</th> 
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body">
+                                    <tr>
+                                        <th class="text-column-emphasis" scope="row">1</th> 
+                                        <th class="text-column-emphasis" scope="row">1</th> 
+                                        <th class="text-column" scope="row">Distal</th> 
+                                        <th class="text-column" scope="row">13</th> 
+                                        <th class="text-column" scope="row">
+                                            <div class="text-column__action">
+                                                <button class="btn-control btn-control-delete" name="btn-delete">
+                                                    <i class="fa-solid fa-trash-can btn-control-icon"></i>
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </th> 
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Choose Treatment -->
+            <div class="container">
+                <div class="container-recent">
+                    <div class="container-recent-inner">
+                        <div class="container-recent__heading">
+                            <p class="recent__heading-title">Choose treatment</p>
+                            <a href="add_choosetreatments.php" class="btn-control btn-control-add">
+                                <i class="fa-solid fa-square-plus btn-control-icon"></i>
+                                Add treatment
+                            </a>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-column-emphasis" scope="col">Select Id</th> 
+                                        <th class="text-column-emphasis" scope="col">Treatment Id</th> 
+                                        <th class="text-column" scope="col">Price ($)</th> 
+                                        <th class="text-column" scope="col">Action</th> 
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body">
+                                    <tr>
+                                        <th class="text-column-emphasis" scope="row">1</th> 
+                                        <th class="text-column-emphasis" scope="row">1</th> 
+                                        <th class="text-column" scope="row">12</th> 
+                                        <th class="text-column" scope="row">
+                                            <div class="text-column__action">
+                                                <button class="btn-control btn-control-delete" name="btn-delete">
+                                                    <i class="fa-solid fa-trash-can btn-control-icon"></i>
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </th> 
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Footer -->
             <?php 
             require_once('./partials/_footer.php'); 
