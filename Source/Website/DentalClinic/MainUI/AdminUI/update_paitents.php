@@ -85,7 +85,7 @@ require_once('./partials/_head.php');
             <!-- Tooth Problem -->
             <div class="container">
                 <div class="container-recent">
-                    <div class="card shadow">
+                    <div class="container-recent-inner">
                         <div class="container-recent__heading">
                             <p class="recent__heading-title">Tooth Problem</p>
                             <div class="container__heading-search" name="btn-add-problem">
@@ -125,7 +125,7 @@ require_once('./partials/_head.php');
             <!-- Contraindication -->
             <div class="container">
                 <div class="container-recent">
-                    <div class="card shadow">
+                    <div class="container-recent-inner">
                         <div class="container-recent__heading">
                             <p class="recent__heading-title">Contraindication</p>
                             <div class="container__heading-search">
@@ -163,7 +163,7 @@ require_once('./partials/_head.php');
             <!-- Select Treatment -->
             <div class="container">
                 <div class="container-recent">
-                    <div class="card shadow">
+                    <div class="container-recent-inner">
                         <div class="container-recent__heading">
                             <p class="recent__heading-title">Treatment Plan</p>
                             <a href="add_treatmentplans.php" class="btn-control btn-control-add">
@@ -200,7 +200,7 @@ require_once('./partials/_head.php');
                                         <th class="text-column" scope="row">
                                             <a href="update_treatmentplans.php" class="btn-control btn-control-edit">
                                                 <i class="fa-solid fa-square-check btn-control-icon"></i>
-                                                Update
+                                                View detail
                                             </a>
                                         </th>
                                     </tr>
