@@ -46,16 +46,16 @@ require_once('./partials/_head.php');
                                         </div>
 
                                         <div class="form-col">
-                                            <label for="" class="form-col__label">Treatment Id</label>
-                                            <select name="treatment_id" id="treatmentId" class="form-cotrol" onchange="getTreatment(this.value)">
+                                            <label for="" class="form-col__label">Dentist Id</label>
+                                            <select name="dentist_id" id="dentistId" class="form-cotrol" onchange="getDentist(this.value)">
                                                 <option value="" class="">1</option>
                                                 <option value="" class="">2</option>
                                             </select>
                                         </div>
 
                                         <div class="form-col">
-                                            <label for="" class="form-col__label">Dentist Id</label>
-                                            <select name="dentist_id" id="dentistId" class="form-cotrol" onchange="getDentist(this.value)">
+                                            <label for="" class="form-col__label">Treatment Id</label>
+                                            <select name="treatment_id" id="treatmentId" class="form-cotrol" onchange="getTreatment(this.value)">
                                                 <option value="" class="">1</option>
                                                 <option value="" class="">2</option>
                                             </select>
@@ -69,17 +69,23 @@ require_once('./partials/_head.php');
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Tooth Surface</label>
-                                            <select name="surface_id" id="surfaceId" class="form-cotrol" onchange="getTreatment(this.value)">
-                                                <option value="" class="">D</option>
-                                                <option value="" class="">L</option>
+                                            <select name="surface_id" id="surfaceId" class="form-cotrol" onchange="getSurface(this.value)">
+                                            <option value="" class="">Lingual</option>
+                                                <option value="" class="">Facial</option>
+                                                <option value="" class="">Distal</option>
+                                                <option value="" class="">Medial</option>
+                                                <option value="" class="">Top</option>
+                                                <option value="" class="">Root</option>
                                             </select>
                                         </div>
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Tooth Id</label>
-                                            <select name="tooth_id" id="toothId" class="form-cotrol" onchange="getTreatment(this.value)">
+                                            <select name="tooth_id" id="toothId" class="form-cotrol" onchange="getTooth(this.value)">
                                                 <option value="" class="">1</option>
                                                 <option value="" class="">2</option>
+                                                <option value="" class="">3</option>
+                                                <option value="" class="">4</option>
                                             </select>
                                         </div>
                                     </div>
