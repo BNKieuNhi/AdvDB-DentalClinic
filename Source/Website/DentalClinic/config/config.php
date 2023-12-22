@@ -1,9 +1,9 @@
 <?php
-$serverName = "MSI";
+$serverName = ".";
 $connectionOptions = array(
     "Database" => "QLPKNHAKHOA",
-    "Uid" => "SONGCAT",
-    "PWD" => "SONGCAT"
+    "Uid" => "KIEUNHI",
+    "PWD" => "KIEUNHI"
 );
 
 // Establishes the connection
@@ -14,6 +14,6 @@ if (!$conn) {
     die(print_r(sqlsrv_errors(), true));
 }
 else{
-    //echo "Connected!";
+    // echo "Connected!";
 }
 ?>
