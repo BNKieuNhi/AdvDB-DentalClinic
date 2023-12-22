@@ -99,6 +99,42 @@
         return $response;
     }
 
+    function getByUserTypeWithPagination($tableName, $userType, $pageSize, $pageNumber, $pageOrder)
+    {
+        global $conn;
+
+        $table = validate($tableName);
+        $startRow = ($pageNumber - 1) * $pageSize;
+        $userType = validate($userType);
+
+        $query = "SELECT COUNT(*) as total FROM $table WHERE UserType = '$userType'"; // Đếm tổng số dòng
+        $result = sqlsrv_query($conn, $query);
+        $totalRows = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)['total'];
+
+        $query = "SELECT * FROM $table WHERE UserType = '$userType' ORDER BY $pageOrder OFFSET $startRow ROWS FETCH NEXT $pageSize ROWS ONLY";
+        $result = sqlsrv_query($conn, $query);
+
+        if ($result) {
+            $data = array();
+
+            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                $data[] = $row;
+            }
+
+            $response = [
+                'status' => 'Data Found',
+                'data' => $data,
+                'total' => $totalRows,
+            ];
+        } else {
+            $response = [
+                'status' => 'Something went wrong! Please try again.',
+            ];
+        }
+
+        return $response;
+    }
+
     function getAll($tableName)
     {
         global $conn;
