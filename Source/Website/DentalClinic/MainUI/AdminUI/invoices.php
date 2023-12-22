@@ -23,8 +23,8 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
             <!-- Page content -->
             <div class="container">
                 <div class="container-recent">
-                    <div class="container-recent-inner">
-                        <div class="container-recent__heading">
+                    <form action="" method="POST" class="container-recent-inner">
+                        <div class="container-recent__heading heading__button">
                             <a href="add_invoices.php" class="btn-control btn-control-add">
                                 <i class="fa-solid fa-file-invoice btn-control-icon"></i>
                                 Add new invoice
@@ -56,9 +56,21 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                                     }
                                 ?>
                             </div>
+                            <?php
+                                $strKeyword = null;
 
+                                if(isset($_POST["btn-search"]))
+                                {
+                                    $strKeyword = $_POST["search_text"];
+                                    $invoices = searchByKeyword('INVOICE', 'ID_Invoice', $strKeyword);
+                                }
+                                else
+                                {
+                                    $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice');
+                                }
+                            ?>
                             <div class="container__heading-search">
-                                <input type="text" class="heading-search__area" placeholder="Search by code, name..." name="search_text">
+                                <input type="text" class="heading-search__area" placeholder="Search by invoice id" name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
@@ -119,7 +131,7 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                             </table>
 
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!-- Footer -->
