@@ -23,7 +23,7 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
             <!-- Page content -->
             <div class="container">
                 <div class="container-recent">
-                    <div class="container-recent-inner">
+                    <form action="" method="POST" class="container-recent-inner">
                         <div class="container-recent__heading heading__button">
                             <a href="add_staffs.php" class="btn-control btn-control-add">
                                 <i class="fa-solid fa-user-plus btn-control-icon"></i>
@@ -56,13 +56,25 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                     }
                                 ?>
                             </div>
+                            <?php
+                                $strKeyword = null;
 
+                                if(isset($_POST["btn-search"]))
+                                {
+                                    $strKeyword = $_POST["search_text"];
+                                    $staffs = searchUserByKeyword('USER_DENTAL', 'Fullname', $strKeyword, 'Dentist');
+                                }
+                                else
+                                {
+                                    $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pageNumber, 'ID_User');
+                                }
+                            ?>
                             <div class="container__heading-search">
-                                <input type="text" class="heading-search__area" placeholder="Search by code, name..." name="search_text">
+                                <input type="text" class="heading-search__area" placeholder="Search by name" name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
-                                </button>                        
+                                </button>      
                             </div>
                         </div>
 
@@ -134,7 +146,7 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                             </table>
 
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!-- Footer -->
