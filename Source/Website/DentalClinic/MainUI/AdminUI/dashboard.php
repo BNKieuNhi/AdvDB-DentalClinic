@@ -1,10 +1,8 @@
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
+$pageSize = 20;
+$pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
 ?>
 
 <body>
@@ -20,7 +18,7 @@ require_once('./partials/_head.php');
             require_once('./partials/_topnav.php');
             ?>
             <!-- Header Card -->
-            <div class="header">
+            <!-- <div class="header">
                 <div class="container header__body">
                     <div class="header-body__card">
                         <div class="body__card">
@@ -62,7 +60,7 @@ require_once('./partials/_head.php');
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>     -->
             <!-- Page content -->
             <div class="container">
                 <div class="container-recent">
