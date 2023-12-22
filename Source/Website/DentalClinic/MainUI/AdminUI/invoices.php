@@ -1,11 +1,11 @@
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 $page_title = "Smile - Staff List";
 require_once('./partials/_head.php');
-$invoices = getAll('INVOICE');
+
+$pageSize = 20;
+$pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice');
 ?>
 
 <body>
@@ -29,13 +29,40 @@ $invoices = getAll('INVOICE');
                                 <i class="fa-solid fa-file-invoice btn-control-icon"></i>
                                 Add new invoice
                             </a>
+                            
+                            <div class="pagination">
+                                <?php
+                                    $totalPages = ceil($invoices['total'] / $pageSize);
+                                    $maxPagesToShow = 4;
+                                    $halfMax = floor($maxPagesToShow / 2);
+
+                                    // Hiển thị nút Previous
+                                    if ($pageNumber > 1) {
+                                        echo '<a href="?page=' . ($pageNumber - 1) . '">&laquo;</a>';
+                                    } else {
+                                        echo '<a class="disabled" href="#">&laquo;</a>';
+                                    }
+
+                                    // Hiển thị các nút trang
+                                    for ($i = max(1, $pageNumber - $halfMax); $i <= min($totalPages, $pageNumber + $halfMax); $i++) {
+                                        echo '<a class="' . ($i == $pageNumber ? 'active' : '') . '" href="?page=' . $i . '">' . $i . '</a>';
+                                    }
+
+                                    // Hiển thị nút Next
+                                    if ($pageNumber < $totalPages) {
+                                        echo '<a href="?page=' . ($pageNumber + 1) . '">&raquo;</a>';
+                                    } else {
+                                        echo '<a class="disabled" href="#">&raquo;</a>';
+                                    }
+                                ?>
+                            </div>
+
                             <div class="container__heading-search">
                                 <input type="text" class="heading-search__area" placeholder="Search by code, name..." name="search_text">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
                                 </button>                        
-
                             </div>
                         </div>
 
@@ -47,7 +74,7 @@ $invoices = getAll('INVOICE');
                                         <th class="text-column" scope="col">Select Treatment</th> 
                                         <th class="text-column" scope="col">Payment Id</th> 
                                         <th class="text-column" scope="col">Total ($)</th> 
-                                        <!-- <th class="text-column" scope="col">Time</th>  -->
+                                        <th class="text-column" scope="col">Time</th> 
                                         <th class="text-column" scope="col">ACTIONS</th> 
                                     </tr>
                                 </thead>
@@ -66,8 +93,10 @@ $invoices = getAll('INVOICE');
                                         <th class="text-column" scope="row"><?php echo $invoice['ID_Select']?></th>
                                         <th class="text-column" scope="row"><?php echo $invoice['ID_Payment']?></th>
                                         <th class="text-column" scope="row"><?php echo $invoice['Total']?></th> 
-
-                                        <th class="text-column" scope="row">
+                                        <?php
+                                            $invoice_time = $invoice['InvoiceTime']->format(' H:i:s Y-m-d');
+                                        ?>
+                                        <th class="text-column" scope="row"><?php echo $invoice_time?></th>                                        <th class="text-column" scope="row">
                                             <div class="text-column__action">
                                                 <a href="invoice_detail.php" class="btn-control btn-control-edit">
                                                     <i class="fa-solid fa-file-lines btn-control-icon"></i>
@@ -90,4 +119,15 @@ $invoices = getAll('INVOICE');
                             </table>
 
                         </div>
-       
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <?php 
+            require_once('./partials/_footer.php'); 
+            ?>
+        </div>
+    </div>
+
+</body>
+</html>
