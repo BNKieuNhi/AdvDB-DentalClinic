@@ -228,6 +228,83 @@
         return $result;
     }
 
+    function searchUserByKeyword($tableName, $key, $value, $userType=null)
+    {
+        global $conn;
+    
+        $table = validate($tableName);
+        $key = validate($key);
+        $userType = validate($userType);
+        $value = validate($value);
+    
+        $query = "SELECT * FROM $table WHERE $key LIKE '%$value%' AND UserType = '$userType'";
+        $result = sqlsrv_query($conn, $query);
+    
+        if ($result) {
+            $data = array();
+    
+            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                $data[] = $row;
+            }
+    
+            if (!empty($data)) {
+                $response = [
+                    'status' => 'Data Found',
+                    'data' => $data,
+                ];
+            } else {
+                $response = [
+                    'status' => 'No Data Found',
+                ];
+            }
+    
+            return $response;
+        } else {
+            $response = [
+                'status' => 'Something went wrong! Please try again.',
+            ];
+            return $response;
+        }
+    }
+
+    function searchByKeyword($tableName, $key, $value)
+    {
+        global $conn;
+    
+        $table = validate($tableName);
+        $key = validate($key);
+        $value = validate($value);
+    
+        $query = "SELECT * FROM $table WHERE $key LIKE '%$value%'";
+        $result = sqlsrv_query($conn, $query);
+    
+        if ($result) {
+            $data = array();
+    
+            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                $data[] = $row;
+            }
+    
+            if (!empty($data)) {
+                $response = [
+                    'status' => 'Data Found',
+                    'data' => $data,
+                ];
+            } else {
+                $response = [
+                    'status' => 'No Data Found',
+                ];
+            }
+    
+            return $response;
+        } else {
+            $response = [
+                'status' => 'Something went wrong! Please try again.',
+            ];
+            return $response;
+        }
+    }
+
     function getbyUserType($tableName, $userType)
     {
         global $conn;
