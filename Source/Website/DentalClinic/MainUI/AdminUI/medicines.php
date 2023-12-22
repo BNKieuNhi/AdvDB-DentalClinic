@@ -23,7 +23,7 @@
             <!-- Page content -->
             <div class="container">
                 <div class="container-recent">
-                    <div class="container-recent-inner">
+                    <form action="" method="POST" class="container-recent-inner">
                         <div class="container-recent__heading heading__button">
                             <a href="add_medicines.php" class="btn-control btn-control-add">
                                 <i class="fa-solid fa-pills btn-control-icon"></i>
@@ -55,13 +55,25 @@
                                     }
                                 ?>
                             </div>
+                            <?php
+                                $strKeyword = null;
+
+                                if(isset($_POST["btn-search"]))
+                                {
+                                    $strKeyword = $_POST["search_text"];
+                                    $medicines = searchByKeyword('MEDICINE', 'MedicineName', $strKeyword);
+                                }
+                                else
+                                {
+                                    $medicines = getAllWithPagination('MEDICINE', $pageSize, $pageNumber, 'ID_Medicine');
+                                }
+                            ?>
                             <div class="container__heading-search">
-                                <input type="text" class="heading-search__area" placeholder="Search by code, name..." name="search_text">
+                                <input type="text" class="heading-search__area" placeholder="Search by name" name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
-                                </button>                        
-
+                                </button>      
                             </div>
                         </div>
 
