@@ -99,7 +99,7 @@
                                                         Delete
                                                 </a>
                                                 <a href="update_medicines.php?id=<?php  echo $medicine['ID_Medicine']?>" class="btn-control btn-control-edit">
-                                                    <i class="fa-solid fa-user-pen btn-control-icon"></i>
+                                                    <i class="fa-solid fa-pills btn-control-icon"></i>
                                                     Update
                                                 </a>
                                             </div>
