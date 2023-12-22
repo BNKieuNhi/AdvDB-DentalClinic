@@ -1,11 +1,11 @@
 <?php
-$page_title = "Smile - Dentist List";
-require_once('./partials/_head.php');
+    $page_title = "Smile - Dentist List";
+    require_once('./partials/_head.php');
 
-$pageSize = 20;
-$pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $pageSize = 20;
+    $pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-$dentists = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pageNumber, 'ID_User');
+    $dentists = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pageNumber, 'ID_User');
 ?>
 
 <body>
@@ -23,7 +23,7 @@ $dentists = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pa
             <!-- Page content -->
             <div class="container">
                 <div class="container-recent">
-                    <div class="container-recent-inner">
+                    <form action="" method="POST" class="container-recent-inner">
                         <div class="container-recent__heading heading__button">
                             <a href="add_dentists.php" class="btn-control btn-control-add">
                                 <i class="fa-solid fa-user-plus btn-control-icon"></i>
@@ -55,14 +55,25 @@ $dentists = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pa
                                     }
                                 ?>
                             </div>
-                            
+                            <?php
+                                $strKeyword = null;
+
+                                if(isset($_POST["btn-search"]))
+                                {
+                                    $strKeyword = $_POST["search_text"];
+                                    $dentists = searchUserByKeyword('USER_DENTAL', 'Fullname', $strKeyword, 'Dentist');
+                                }
+                                else
+                                {
+                                    $dentists = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pageNumber, 'ID_User');
+                                }
+                            ?>
                             <div class="container__heading-search">
-                                <input type="text" class="heading-search__area" placeholder="Search by code, name..." name="search_text">
+                                <input type="text" class="heading-search__area" placeholder="Search by name" name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
-                                </button>                        
-
+                                </button>      
                             </div>
                         </div>
 
@@ -135,7 +146,7 @@ $dentists = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pa
                             </table>
 
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!-- Footer -->
