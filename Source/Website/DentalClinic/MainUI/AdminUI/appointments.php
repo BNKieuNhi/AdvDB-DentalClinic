@@ -1,12 +1,11 @@
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 $page_title = "Smile - Staff List";
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
-$appointments = getAll('APPOINTMENT');
+
+$pageSize = 20;
+$pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$appointments = getAllWithPagination('APPOINTMENT', $pageSize, $pageNumber, 'ID_Appointment');
 ?>
 
 <body>
@@ -30,6 +29,34 @@ $appointments = getAll('APPOINTMENT');
                                 <i class="fa-regular fa-calendar-plus btn-control-icon"></i>
                                 Add new appointment
                             </a>
+
+                            <div class="pagination">
+                                <?php
+                                    $totalPages = ceil($appointments['total'] / $pageSize);
+                                    $maxPagesToShow = 4;
+                                    $halfMax = floor($maxPagesToShow / 2);
+
+                                    // Hiển thị nút Previous
+                                    if ($pageNumber > 1) {
+                                        echo '<a href="?page=' . ($pageNumber - 1) . '">&laquo;</a>';
+                                    } else {
+                                        echo '<a class="disabled" href="#">&laquo;</a>';
+                                    }
+
+                                    // Hiển thị các nút trang
+                                    for ($i = max(1, $pageNumber - $halfMax); $i <= min($totalPages, $pageNumber + $halfMax); $i++) {
+                                        echo '<a class="' . ($i == $pageNumber ? 'active' : '') . '" href="?page=' . $i . '">' . $i . '</a>';
+                                    }
+
+                                    // Hiển thị nút Next
+                                    if ($pageNumber < $totalPages) {
+                                        echo '<a href="?page=' . ($pageNumber + 1) . '">&raquo;</a>';
+                                    } else {
+                                        echo '<a class="disabled" href="#">&raquo;</a>';
+                                    }
+                                ?>
+                            </div>
+
                             <div class="container__heading-search">
                                 <input type="text" class="heading-search__area" placeholder="Search by code, name..." name>
                                 <button class="btn-control btn-control-search" name="btn-search">
@@ -48,8 +75,9 @@ $appointments = getAll('APPOINTMENT');
                                         <th class="text-column" scope="col">Dentist</th> 
                                         <th class="text-column" scope="col">Customer</th> 
                                         <th class="text-column" scope="col">Room</th> 
-                                        <!-- <th class="text-column" scope="col">Date</th>  -->
-                                        <!-- <th class="text-column" scope="col">Time</th>  -->
+                                        <th class="text-column" scope="col">Date</th> 
+                                        <th class="text-column" scope="col">Time</th> 
+                                        <th class="" scope="col"></th> 
                                         <th class="text-column" scope="col">Status</th> 
                                         <th class="text-column" scope="col">ACTIONS</th> 
                                     </tr>
@@ -69,13 +97,19 @@ $appointments = getAll('APPOINTMENT');
                                         <th class="text-column" scope="row"><?php echo $appointment['ID_Dentist']?></th>
                                         <th class="text-column" scope="row"><?php echo $appointment['ID_Customer']?></th> 
                                         <th class="text-column" scope="row"><?php echo $appointment['ID_Room']?></th> 
-                                        <?php if($appointment['Status_appt'] = 'New')
-                                            {?>
+                                        <?php
+                                            $appt_date = $appointment['Date_Appt']->format('d-m-Y');
+                                            $appt_time = $appointment['Time_Appt']->format('H:i:s');
+                                        ?>
+                                        <th class="text-column" scope="row"><?php echo $appt_date?></th>   
+                                        <th class="text-column" scope="row"><?php echo $appt_time?></th>                                        <th class="text-column" scope="row">
+                                        <?php if($appointment['Status_appt'] = 'New') 
+                                        {?>
                                             <th class="text-column" scope="row">
                                                 <span class="badge badge-success">New</span>
                                             </th> 
-                                            <?php
-                                            }
+                                        <?php
+                                        }
                                             else
                                             {
                                             ?>
