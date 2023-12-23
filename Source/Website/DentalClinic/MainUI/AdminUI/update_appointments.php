@@ -67,12 +67,12 @@ require_once('./partials/_head.php');
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Appointment Date</label>
-                                            <input type="text" name="appt_date" class="form-control" value>
+                                            <input type="date" name="appt_date" class="form-control" value>
                                         </div>
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Appointment Time</label>
-                                            <input type="text" name="appt_time" class="form-control" value>
+                                            <input type="time" name="appt_time" class="form-control" value>
                                         </div>
                                         
                                         <div class="form-col">
