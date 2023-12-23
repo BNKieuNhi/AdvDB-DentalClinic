@@ -31,7 +31,7 @@ $staff = getbyKeyValue('USER_DENTAL', 'ID_User', $staff_id);
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" action="../../Controller/AdminController/update_staff.php">
+                            <form method="POST" action="../../../Controller/AdminController/update_staff.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">

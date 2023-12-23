@@ -9,7 +9,7 @@
         if(empty($_POST['staff_name']) || empty($_POST['staff_gender']) || empty($_POST['staff_address']) || empty($_POST['staff_phone'])
           || empty($_POST['user_name']))
         {
-            redirect('../../Admin UI/update_staff.php?id='.$staff_id, 'All fields are required.', '');
+            redirect('../../MainUI/AdminUI/update_staff.php?id='.$staff_id, 'All fields are required.', '');
             exit(0);
         }
         else
