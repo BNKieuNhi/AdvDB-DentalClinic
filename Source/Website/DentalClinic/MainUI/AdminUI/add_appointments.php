@@ -1,10 +1,7 @@
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
+$dentists = getIdbyUserType(USER_DENTAL, 'Dentist');
+
 ?>
 
 <body>
@@ -29,15 +26,33 @@ require_once('./partials/_head.php');
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" class="">
+                            <form method="POST" action="../../Controller/AdminController/add_medicine.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Dentist Id</label>
                                             <select name="dentist_id" id="dentistId" class="form-cotrol" onchange="getDentist(this.value)">
-                                                <option value="" class="">Select Dentist</option>
-                                                <option value="" class="">1</option>
-                                                <option value="" class="">2</option>
+                                            <?php
+                                                $count = sizeof($dentists['data']);
+                                                //echo $dentists['data'];
+                                                if($count > 0)
+                                                {
+                                                ?>
+                                                    <?php  foreach($dentists['data'] as $dentist) 
+                                                    {  
+                                                    ?>
+                                                <option name="dentist_id" class="">1<?php echo $dentist['ID_User']?></option>
+                                                <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                    <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                                    <?php
+                                                }
+                                                ?>
+
                                             </select>
                                         </div>
 
