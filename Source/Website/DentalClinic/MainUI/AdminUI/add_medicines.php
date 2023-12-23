@@ -1,10 +1,5 @@
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
 ?>
 
 <body>
@@ -29,17 +24,17 @@ require_once('./partials/_head.php');
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" class="">
+                            <form method="POST" action="../../Controller/AdminController/add_medicine.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Medicine Name</label>
-                                            <input type="text" name="medicine_name" class="form-control" value="LJCH-7436">
+                                            <input type="text" name="medicine_name" placeholder="Enter medicine name" class="form-control">
                                         </div>
 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Medicine Price ($)</label>
-                                            <input type="text" name="medicine_price" class="form-control" value>
+                                            <input type="number" name="medicine_price" placeholder="Enter medicine price" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +44,7 @@ require_once('./partials/_head.php');
                                 <div class="form-row">
                                     <div class="form-col margin-0">
                                         <div class="form-col-bottom">
-                                            <input type="submit" name="addMedicine" value="Add Medicine" class="btn-control btn-control-add" value="">
+                                            <input type="submit" name="btn-add-medicine" value="Add Medicine" class="btn-control btn-control-add">
                                         </div>
                                     </div>
                                 </div>
