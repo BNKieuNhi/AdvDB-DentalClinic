@@ -87,7 +87,6 @@
                                         <th class="text-column" scope="col">Gender</th> 
                                         <th class="text-column" scope="col">Phone Number</th> 
                                         <th class="text-column" scope="col">Address</th> 
-                                        <!-- <th class="text-column" scope="col">DOB</th>  -->
                                         <th class="text-column" scope="col">ACTION</th> 
                                     </tr>
                                 </thead>
