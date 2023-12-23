@@ -1,10 +1,6 @@
+
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
 ?>
 
 <body>
@@ -28,24 +24,20 @@ require_once('./partials/_head.php');
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" class="">
+        
+                            <form method="POST" action="../../Controller/AdminController/add_staff.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Staff Name</label>
-                                            <input type="text" name="staff_name" class="form-control" value="LJCH-7436">
+                                            <input type="text" name="staff_name" placeholder="Enter your fullname" class="form-control" value>
                                         </div>
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Gender</label>
-                                            <select name="staff_gender" id="staffGender" class="form-cotrol" onchange="getStaffGender(this.value)">
-                                                <option value="" class="">Select Gender</option>
-                                                <option value="" class="">Nam</option>
-                                                <option value="" class="">Nữ</option>
+                                            <select name="staff_gender" id="staffGender" class="form-cotrol">
+                                                <option value="M">Male</option>
+                                                <option value="F">Female</option>
                                             </select>
-                                        </div>
-                                        <div class="form-col">
-                                            <label for="" class="form-col__label">Staff Phone Number</label>
-                                            <input type="text" name="staff_phone" class="form-control" value>
                                         </div>
                                     </div>
                                 </div>
@@ -56,12 +48,11 @@ require_once('./partials/_head.php');
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Staff Address</label>
-                                            <input type="text" name="staff_address" class="form-control" value="Street 5">
+                                            <input type="text" name="staff_address" placeholder="Enter your address" class="form-control">
                                         </div>
-
                                         <div class="form-col">
-                                            <label for="" class="form-col__label">Date Of Birth</label>
-                                            <input type="text" name="staff_dob" class="form-control" value>
+                                            <label for="" class="form-col__label">Staff Phone Number</label>
+                                            <input type="text" name="staff_phone" placeholder="Enter your phone number" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -72,11 +63,11 @@ require_once('./partials/_head.php');
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Username</label>
-                                            <input type="text" name="user_name" class="form-control" value="LJCH-7436">
+                                            <input type="text" name="user_name" placeholder="Enter your username" class="form-control">
                                         </div>
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Password</label>
-                                            <input type="text" name="password" class="form-control" value="LJCH-7436">
+                                            <input type="text" name="password" placeholder="Enter your password" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +77,7 @@ require_once('./partials/_head.php');
                                 <div class="form-row">
                                     <div class="form-col margin-0">
                                         <div class="form-col-bottom">
-                                            <input type="submit" name="addStaff" value="Add Staff" class="btn-control btn-control-add" value="">
+                                            <input type="submit" name="btn-add-staff" value="Add Staff" class="btn-control btn-control-add" value="">
                                         </div>
                                     </div>
                                 </div>
