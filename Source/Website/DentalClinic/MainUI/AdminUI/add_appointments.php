@@ -1,7 +1,8 @@
 <?php
 require_once('./partials/_head.php');
-$dentists = getIdbyUserType(USER_DENTAL, 'Dentist');
-
+$dentists = getIdbyUserType('USER_DENTAL', 'Dentist');
+$paitents = getAll('CUSTOMER');
+$rooms = getAll('ROOM');
 ?>
 
 <body>
@@ -26,22 +27,21 @@ $dentists = getIdbyUserType(USER_DENTAL, 'Dentist');
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" action="../../Controller/AdminController/add_medicine.php">
+                            <form method="POST" action="../../Controller/AdminController/add_appointment.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Dentist Id</label>
-                                            <select name="dentist_id" id="dentistId" class="form-cotrol" onchange="getDentist(this.value)">
+                                            <select name="dentist_id" id="dentistId" class="form-cotrol">
                                             <?php
                                                 $count = sizeof($dentists['data']);
-                                                //echo $dentists['data'];
                                                 if($count > 0)
                                                 {
                                                 ?>
                                                     <?php  foreach($dentists['data'] as $dentist) 
                                                     {  
                                                     ?>
-                                                <option name="dentist_id" class="">1<?php echo $dentist['ID_User']?></option>
+                                                <option class=""><?php echo $dentist['ID_User']?></option>
                                                 <?php
                                                     }
                                                 }
@@ -51,26 +51,57 @@ $dentists = getIdbyUserType(USER_DENTAL, 'Dentist');
                                                     <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
                                                     <?php
                                                 }
-                                                ?>
-
+                                            ?>
                                             </select>
                                         </div>
 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Paitent Id</label>
-                                            <select name="paitent_id" id="ptId" class="form-cotrol" onchange="getPaintent(this.value)">
-                                                <option value="" class="">Select Paitent</option>
-                                                <option value="" class="">1</option>
-                                                <option value="" class="">2</option>
+                                            <select name="paitent_id" id="ptId" class="form-cotrol">
+                                            <?php
+                                                $count = sizeof($paitents['data']);
+                                                if($count > 0)
+                                                {
+                                                ?>
+                                                    <?php  foreach($paitents['data'] as $paitent) 
+                                                    {  
+                                                    ?>
+                                                <option class=""><?php echo $paitent['ID_Customer']?></option>
+                                                <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                    <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                                    <?php
+                                                }
+                                            ?>
                                             </select>
                                         </div>
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Room</label>
-                                            <select name="room_id" id="roomId" class="form-cotrol" onchange="getRoom(this.value)">
-                                                <option value="" class="">Select Room</option>
-                                                <option value="" class="">R01</option>
-                                                <option value="" class="">R02</option>
+                                            <select name="room_id" id="roomId" class="form-cotrol"">
+                                            <?php
+                                                $count = sizeof($rooms['data']);
+                                                if($count > 0)
+                                                {
+                                                ?>
+                                                    <?php  foreach($rooms['data'] as $room) 
+                                                    {  
+                                                    ?>
+                                                <option class=""><?php echo $room['ID_Room']?></option>
+                                                <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                    <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                                    <?php
+                                                }
+                                            ?>
                                             </select>
                                         </div>
                                     </div>
@@ -82,19 +113,19 @@ $dentists = getIdbyUserType(USER_DENTAL, 'Dentist');
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Appointment Date</label>
-                                            <input type="text" name="appt_date" class="form-control" value>
+                                            <input type="date" name="appt_date" class="form-control" value>
                                         </div>
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Appointment Time</label>
-                                            <input type="text" name="appt_time" class="form-control" value>
+                                            <input type="time" name="appt_time" class="form-control" value>
                                         </div>
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Appointment Status</label>
-                                            <select name="appt_status" id="apptStatus" class="form-cotrol" onchange="getStatus(this.value)">
-                                                <option value="" class="">Mới</option>
-                                                <option value="" class="">Tái khám</option>
+                                            <select name="appt_status" id="apptStatus" class="form-cotrol">
+                                                <option value="" class="">New</option>
+                                                <option value="" class="">Reassess</option>
                                             </select>
                                         </div>
 
@@ -106,7 +137,7 @@ $dentists = getIdbyUserType(USER_DENTAL, 'Dentist');
                                 <div class="form-row">
                                     <div class="form-col margin-0">
                                         <div class="form-col-bottom">
-                                            <input type="submit" name="addAppt" value="Add Appointment" class="btn-control btn-control-add" value="">
+                                            <input type="submit" name="btn-add-appt" value="Add Appointment" class="btn-control btn-control-add">
                                         </div>
                                     </div>
                                 </div>
