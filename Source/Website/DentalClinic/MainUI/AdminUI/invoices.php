@@ -62,7 +62,13 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                                 if(isset($_POST["btn-search"]))
                                 {
                                     $strKeyword = $_POST["search_text"];
-                                    $invoices = searchByKeyword('INVOICE', 'ID_Invoice', $strKeyword);
+                                    $invoices = searchByKeyword('INVOICE', $strKeyword);
+                                    
+                                    // $count = sizeof($invoices['data']);
+                                    // if($count <= 0)
+                                    // {
+                                    //     redirect('add_invoices.php', 'No data found.', '');
+                                    // }
                                 }
                                 else
                                 {
@@ -70,7 +76,7 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                                 }
                             ?>
                             <div class="container__heading-search">
-                                <input type="text" class="heading-search__area" placeholder="Search by invoice id" name="search_text" value="<?php echo $strKeyword;?>">
+                                <input type="text" class="heading-search__area" placeholder="Search by code, date, time..." name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
