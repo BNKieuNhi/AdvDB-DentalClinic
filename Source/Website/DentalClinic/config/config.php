@@ -1,9 +1,15 @@
 <?php
 $serverName = ".";
+// $connectionOptions = array(
+//     "Database" => "QLPKNHAKHOA",
+//     "Uid" => "KIEUNHI",
+//     "PWD" => "KIEUNHI"
+// );
+
 $connectionOptions = array(
     "Database" => "QLPKNHAKHOA",
-    "Uid" => "KIEUNHI",
-    "PWD" => "KIEUNHI"
+    "Uid" => "SONGCAT",
+    "PWD" => "SONGCAT"
 );
 
 // Establishes the connection

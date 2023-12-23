@@ -23,7 +23,8 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
             <!-- Page content -->
             <div class="container">
                 <div class="container-recent">
-                    <form action="" method="POST" class="container-recent-inner">
+                <form action="" method="POST" class="container-recent-inner">
+                    <div class="container-recent-inner">
                         <div class="container-recent__heading heading__button">
                             <a href="add_staffs.php" class="btn-control btn-control-add">
                                 <i class="fa-solid fa-user-plus btn-control-icon"></i>
@@ -62,13 +63,18 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                 if(isset($_POST["btn-search"]))
                                 {
                                     $strKeyword = $_POST["search_text"];
-                                    $staffs = searchUserByKeyword('USER_DENTAL', 'Fullname', $strKeyword, 'Dentist');
+                                    $staffs = searchUserByKeyword('USER_DENTAL', 'Fullname', $strKeyword, 'Staff');
+                                    if($staffs['status'] == 'No Data Found')
+                                    {
+                                        $_SESSION['status'] = $staffs['status'];
+                                    }
                                 }
                                 else
                                 {
-                                    $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pageNumber, 'ID_User');
+                                    $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNumber, 'ID_User');
                                 }
                             ?>
+                            
                             <div class="container__heading-search">
                                 <input type="text" class="heading-search__area" placeholder="Search by name" name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
@@ -106,7 +112,7 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                         <th class="text-column-emphasis" scope="row"><?php echo $staff['ID_User']?></th>
                                         <th class="text-column" scope="row"><?php echo $staff['Username']?></th>
                                         <th class="text-column" scope="row"><?php echo $staff['Fullname']?></th> 
-                                        <?php if($staff['Gender'] = 'F')
+                                        <?php if($staff['Gender'] == 'F')
                                             {?>
                                                 <th class="text-column" scope="row">Female</th> 
                                             <?php
@@ -122,11 +128,12 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                         <th class="text-column" scope="row"><?php echo $staff['CurrAddress']?></th> 
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
-                                                <button class="btn-control btn-control-delete" name="btn-delete">
-                                                    <i class="fa-solid fa-trash-can btn-control-icon"></i>
-                                                    Delete
-                                                </button>
-                                                <a href="update_staffs.php" class="btn-control btn-control-edit">
+                                            <a href="../../Controller/AdminController/delete_staff.php?id=<?php  echo $staff['ID_User']?>" 
+                                                    class="btn-control btn-control-delete">
+                                                        <i class="fa-solid fa-trash-can btn-control-icon"></i>
+                                                        Delete
+                                                    </a>
+                                                <a href="update_staffs.php?id=<?php  echo $staff['ID_User']?>" class="btn-control btn-control-edit">
                                                     <i class="fa-solid fa-user-pen btn-control-icon"></i>
                                                     Update
                                                 </a>
@@ -145,6 +152,7 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                 </tbody>
                             </table>
 
+                            </div>
                         </div>
                     </form>
                 </div>
