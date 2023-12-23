@@ -9,7 +9,7 @@
         if(empty($_POST['staff_name']) || empty($_POST['staff_gender']) || empty($_POST['staff_address']) || empty($_POST['staff_phone'])
           || empty($_POST['user_name']))
         {
-            redirect('../../MainUI/AdminUI/update_staff.php?id='.$staff_id, 'All fields are required.', '');
+            redirect('../../AdminUI/update_staff.php?id='.$staff_id, 'All fields are required.', '');
             exit(0);
         }
         else
@@ -37,10 +37,10 @@
             ];
 
             $dataUser = [
-                'Fullname' => $staff_name,
-                'Gender' => $staff_gender,
-                'CurrAddress'    => $staff_address,
-                'PhoneNumber'    => $staff_phone,
+                'Fullname'    => $staff_name,
+                'Gender'      => $staff_gender,
+                'CurrAddress' => $staff_address,
+                'PhoneNumber' => $staff_phone,
             ];
 
             $updateAccount = updatebyKeyValue('ACCOUNT', 'Username', $username, $dataAccount);
