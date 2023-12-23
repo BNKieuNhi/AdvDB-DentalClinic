@@ -63,7 +63,7 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                 if(isset($_POST["btn-search"]))
                                 {
                                     $strKeyword = $_POST["search_text"];
-                                    $staffs = searchUserByKeyword('USER_DENTAL', 'Fullname', $strKeyword, 'Staff');
+                                    $staffs = searchUserByKeyword('USER_DENTAL', $strKeyword, 'Staff');
                                     if($staffs['status'] == 'No Data Found')
                                     {
                                         $_SESSION['status'] = $staffs['status'];
@@ -77,7 +77,7 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                             ?>
                             
                             <div class="container__heading-search">
-                                <input type="text" class="heading-search__area" placeholder="Search by name" name="search_text" value="<?php echo $strKeyword;?>">
+                                <input type="text" class="heading-search__area" placeholder="Search by code, name..." name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
