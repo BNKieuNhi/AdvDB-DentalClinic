@@ -61,7 +61,7 @@ require_once('./partials/_head.php');
 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Date Of Birth</label>
-                                            <input type="text" name="paitent_dob" class="form-control" value>
+                                            <input type="date" name="paitent_dob" class="form-control" value>
                                         </div>
                                     </div>
                                 </div>
