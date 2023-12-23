@@ -67,6 +67,7 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                     if($staffs['status'] == 'No Data Found')
                                     {
                                         $_SESSION['status'] = $staffs['status'];
+                                        $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNumber, 'ID_User');
                                     }
                                 }
                                 else
