@@ -36,7 +36,7 @@
         return $result;
     }
 
-    function updatebyEmail($tableName, $keys, $values, $data)
+    function updatebyKeyValue($tableName, $keys, $values, $data)
     {
         global $conn;
         //print_r($data);
@@ -58,7 +58,11 @@
         $query = "UPDATE $table SET $setClause WHERE $keys ='$values'";
 
         //echo $query;
-        $result =  sqlsrv_query($conn, $query);
+        $result =  [
+            'status' => sqlsrv_query($conn, $query),
+            'query'  => $query,
+        ];
+
 
         return $result;
     }
@@ -183,22 +187,27 @@
         $query = "SELECT * FROM $table WHERE $key = '$value'";
         $result =  sqlsrv_query($conn, $query);
 
+
         if($result)
         {
-            if(sqlsrv_num_rows($result) == 1)
+            $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+            //$cnt = sqlsrv_num_rows($result);
+            if($row == 0)
             {
-                $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
-
                 $response = [
-                    'status' => 'Data Found',
-                    'data' => $row,
+                    'status' => 'No Data Found',
+                    'query' => $query,
+                    
                 ];
                 return $response;
             }
             else
             {
+
                 $response = [
-                    'status' => 'No Data Found',
+                    'status' => 'Data Found',
+                    'data' => $row,
+                    'query' => $query,
                 ];
                 return $response;
             }
@@ -221,9 +230,12 @@
         $key = validate($key);
         $value = validate($value);
 
-        $query = "DELETE FROM $table WHERE $key = '$value' LIMIT 1";
+        $query = "DELETE FROM $table WHERE $key = '$value'";
         
-        $result =  sqlsrv_query($conn, $query);
+        $result = [
+           'status' => sqlsrv_query($conn, $query),
+           'query'  => $query
+        ];
 
         return $result;
     }
