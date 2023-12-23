@@ -61,7 +61,7 @@
                                 if(isset($_POST["btn-search"]))
                                 {
                                     $strKeyword = $_POST["search_text"];
-                                    $dentists = searchUserByKeyword('USER_DENTAL', 'Fullname', $strKeyword, 'Dentist');
+                                    $dentists = searchUserByKeyword('USER_DENTAL', $strKeyword, 'Dentist');
                                 }
                                 else
                                 {
@@ -69,7 +69,7 @@
                                 }
                             ?>
                             <div class="container__heading-search">
-                                <input type="text" class="heading-search__area" placeholder="Search by name" name="search_text" value="<?php echo $strKeyword;?>">
+                                <input type="text" class="heading-search__area" placeholder="Search by code, name..." name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
