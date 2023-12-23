@@ -243,18 +243,52 @@
         return $result;
     }
 
-    function searchUserByKeyword($tableName, $key, $value, $userType=null)
+    // Hàm lấy tên các cột trong bảng
+    function getTableColumns($tableName)
+    {
+        global $conn;
+    
+        // Xác thực và tránh SQL injection
+        $tableName = validate($tableName);
+    
+        // Truy vấn để lấy tên các cột
+        $query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ?";
+        
+        // Thực thi truy vấn
+        $params = array($tableName);
+        $result = sqlsrv_query($conn, $query, $params);
+    
+        $columns = array();
+    
+        while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+            $columns[] = $row['COLUMN_NAME'];
+        }
+    
+        return $columns;
+    }
+
+    function searchUserByKeyword($tableName, $value, $userType=null)
     {
         global $conn;
     
         $table = validate($tableName);
-        $key = validate($key);
         $userType = validate($userType);
         $value = validate($value);
     
-        $query = "SELECT * FROM $table WHERE $key LIKE '%$value%' AND UserType = '$userType'";
-        $result = sqlsrv_query($conn, $query);
+        $query = "SELECT * FROM $table WHERE UserType = '$userType' AND ";
+        $columns = getTableColumns($tableName);
     
+        $conditions = [];
+        foreach ($columns as $column) {
+            $conditions[] = "$column LIKE '%$value%'";
+        }
+    
+        $query = "SELECT * FROM $tableName WHERE ";
+        $query .= implode(" OR ", $conditions);
+    
+        // Thực hiện truy vấn chính
+        $result = sqlsrv_query($conn, $query);
+
         if ($result) {
             $data = array();
     
@@ -282,15 +316,25 @@
         }
     }
 
-    function searchByKeyword($tableName, $key, $value)
+    function searchByKeyword($tableName, $value)
     {
         global $conn;
     
         $table = validate($tableName);
-        $key = validate($key);
         $value = validate($value);
     
-        $query = "SELECT * FROM $table WHERE $key LIKE '%$value%'";
+        $query = "SELECT * FROM $table WHERE ";
+        $columns = getTableColumns($tableName);
+    
+        $conditions = [];
+        foreach ($columns as $column) {
+            $conditions[] = "$column LIKE '%$value%'";
+        }
+    
+        $query = "SELECT * FROM $tableName WHERE ";
+        $query .= implode(" OR ", $conditions);
+    
+        // Thực hiện truy vấn chính
         $result = sqlsrv_query($conn, $query);
     
         if ($result) {
