@@ -62,7 +62,7 @@ $appointments = getAllWithPagination('APPOINTMENT', $pageSize, $pageNumber, 'ID_
                                 if(isset($_POST["btn-search"]))
                                 {
                                     $strKeyword = $_POST["search_text"];
-                                    $appointments = searchByKeyword('APPOINTMENT', 'ID_Dentist', $strKeyword);
+                                    $appointments = searchByKeyword('APPOINTMENT', $strKeyword);
                                 }
                                 else
                                 {
@@ -70,7 +70,7 @@ $appointments = getAllWithPagination('APPOINTMENT', $pageSize, $pageNumber, 'ID_
                                 }
                             ?>
                             <div class="container__heading-search">
-                                <input type="text" class="heading-search__area" placeholder="Search by dentist id" name="search_text" value="<?php echo $strKeyword;?>">
+                                <input type="text" class="heading-search__area" placeholder="Search by code, room..." name="search_text" value="<?php echo $strKeyword;?>">
                                 <button class="btn-control btn-control-search" name="btn-search">
                                     <i class="fa-solid fa-magnifying-glass btn-control-icon"></i>
                                     Search
