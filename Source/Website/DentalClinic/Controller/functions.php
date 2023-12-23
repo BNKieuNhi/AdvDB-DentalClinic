@@ -31,11 +31,14 @@
 
         $query = "INSERT INTO $table ($keys) VALUES ($values)";
         
+        //$row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
         //echo $query;
-        $result = sqlsrv_query($conn, $query);
+        $result = 
+        [ 'status' => sqlsrv_query($conn, $query),
+           'query' => $query,
+        ];
         return $result;
     }
-
     function updatebyKeyValue($tableName, $keys, $values, $data)
     {
         global $conn;
@@ -354,6 +357,43 @@
         }
     }
     
+    function getIdbyUserType($tableName, $userType)
+    {
+        global $conn;
+
+        $table = validate($tableName);
+        $userType = validate($userType);
+    
+        $query = "SELECT ID_User FROM $table WHERE UserType = '$userType'";
+        $result = sqlsrv_query($conn, $query);
+    
+        if ($result) {
+            $data = [];
+    
+            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                $data[] = $row;
+            }
+    
+            if (!empty($data)) {
+                $response = [
+                    'status' => 'Data Found',
+                    'data' => $data,
+                ];
+            } else {
+                $response = [
+                    'status' => 'No Data Found',
+                ];
+            }
+    
+            return $response;
+        } else {
+            $response = [
+                'status' => 'Something went wrong! Please try again.',
+            ];
+            return $response;
+        }
+    }
+
     function checkParam($type)
     {
         if(!empty($_GET[$type]))
