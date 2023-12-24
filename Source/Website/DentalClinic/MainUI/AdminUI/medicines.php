@@ -2,7 +2,7 @@
     $page_title = "Smile - Medicine List";
     require_once('./partials/_head.php');
 
-    $pageSize = 100;
+    $pageSize = 20;
     $pageNumber = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
     $medicines = getAllWithPagination('MEDICINE', $pageSize, $pageNumber, 'ID_Medicine');
