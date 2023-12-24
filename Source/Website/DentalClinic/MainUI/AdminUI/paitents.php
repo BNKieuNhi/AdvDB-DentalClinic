@@ -123,7 +123,7 @@
                                                     <i class="fa-solid fa-trash-can btn-control-icon"></i>
                                                     Delete
                                                 </button>
-                                                <a href="update_paitents.php" class="btn-control btn-control-edit">
+                                                <a href="update_paitents.php?id=<?php  echo $paitent['ID_Customer']?>" class="btn-control btn-control-edit">
                                                     <i class="fa-solid fa-user-pen btn-control-icon"></i>
                                                     View Detail
                                                 </a>
