@@ -92,23 +92,23 @@ $choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_i
                                             <select name="select_status" id="selectStatus" class="form-cotrol">
                                             <?php if($select['data']['SelectionStatus'] == 'Planning')
                                                 { ?>
-                                                    <option value="Planning" >Planning</option>
-                                                    <option value="Completed" selected>Completed</option>
-                                                    <option value="Canceled" selected>Canceled</option>
+                                                    <option value="Planning" selected>Planning</option>
+                                                    <option value="Completed">Completed</option>
+                                                    <option value="Canceled">Canceled</option>
                                                 <?php 
                                                 } 
                                                 elseif($select['data']['SelectionStatus'] == 'Completed')
                                                 { ?>
                                                     <option value="Completed" selected>Completed</option>
-                                                    <option value="Canceled" >Canceled</option>
-                                                    <option value="Planning" >Planning</option>
+                                                    <option value="Canceled">Canceled</option>
+                                                    <option value="Planning">Planning</option>
                                                 <?php 
                                                 } 
                                                 else
                                                 { ?>
-                                                    <option value="Canceled" >Canceled</option>
-                                                    <option value="Completed" selected>Completed</option>
-                                                    <option value="Planning" >Planning</option>
+                                                    <option value="Canceled" selected>Canceled</option>
+                                                    <option value="Completed">Completed</option>
+                                                    <option value="Planning">Planning</option>
                                                 <?php 
                                                 }
                                                 ?> 
