@@ -11,9 +11,9 @@
 
         if(!empty($select_id) && !empty($payment_id) && !empty($amount_paid))        {
             $dataInvoice = [
-                'ID_Select'        => $select_id,
-                'GenID_Paymentder' => $payment_id,
-                'AmountPaid'       => $amount_paid,
+                'ID_Select'  => $select_id,
+                'ID_Payment' => $payment_id,
+                'AmountPaid' => $amount_paid,
             ];
 
             $addInvoice = insert('INVOICE', $dataInvoice);
