@@ -3,7 +3,7 @@
     include("../../config/config.php");
     session_start();
     
-    if(isset($_POST['btn-add-appointment']))
+    if(isset($_POST['btn-add-appt']))
     {
         $dentist = $_POST['dentist_id'];
         $paitent = $_POST['paitent_id'];
