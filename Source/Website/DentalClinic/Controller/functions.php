@@ -178,6 +178,41 @@
         }
     }
     
+    function getAllByKeyValue($tableName, $key, $value)
+    {
+        global $conn;
+    
+        $table = validate($tableName);
+    
+        $query = "SELECT * FROM $table WHERE $key = '$value'";
+        $result = sqlsrv_query($conn, $query);
+    
+        if ($result) {
+            $data = array();
+    
+            while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
+                $data[] = $row;
+            }
+    
+            if (!empty($data)) {
+                $response = [
+                    'status' => 'Data Found',
+                    'data' => $data,
+                ];
+            } else {
+                $response = [
+                    'status' => 'No Data Found',
+                ];
+            }
+    
+            return $response;
+        } else {
+            $response = [
+                'status' => 'Something went wrong! Please try again.',
+            ];
+            return $response;
+        }
+    }
 
     function getbyKeyValue($tableName, $key, $value)
     {
@@ -283,7 +318,7 @@
             $conditions[] = "$column LIKE '%$value%'";
         }
     
-        $query = "SELECT * FROM $tableName WHERE ";
+        $query = "SELECT * FROM $tableName WHERE UserType = '$userType' AND ";
         $query .= implode(" OR ", $conditions);
     
         // Thực hiện truy vấn chính
