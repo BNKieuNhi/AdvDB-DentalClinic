@@ -1,10 +1,11 @@
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
+
+$paitent_id = $_GET['id'];
+$paitent = getbyKeyValue('CUSTOMER', 'ID_Customer', $paitent_id);
+$tooth_problems = getAllByKeyValue('TOOTH_PROBLEM', 'ID_Customer', $paitent_id);
+$contraindications = getAllByKeyValue('CONTRAINDICATION', 'ID_Customer', $paitent_id);
+$selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
 ?>
 
 <body>
@@ -37,7 +38,7 @@ require_once('./partials/_head.php');
                                         </div>
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Gender</label>
-                                            <select name="paitent_gender" id="ptGender" class="form-cotrol" onchange="getCustomer(this.value)">
+                                            <select name="paitent_gender" id="ptGender" class="form-cotrol">
                                                 <option value="" class="">Select Gender</option>
                                                 <option value="" class="">Nam</option>
                                                 <option value="" class="">Nữ</option>
@@ -85,11 +86,28 @@ require_once('./partials/_head.php');
             <!-- Tooth Problem -->
             <div class="container">
                 <div class="container-recent">
+                <form method="POST" action="">
                     <div class="container-recent-inner">
                         <div class="container-recent__heading">
                             <p class="recent__heading-title">Tooth Problem</p>
-                            <div class="container__heading-search" name="btn-add-problem">
-                                <input type="text" class="heading-search__area" placeholder="Tooth Problem" name="problem_text">
+                            <?php
+                            if(isset($_POST["btn-add-problem"]))
+                            {
+                                $problem = $_POST["problem_text"];
+                                if(!empty($problem))
+                                {
+                                    $dataProblem = [
+                                        'ID_Customer' => $paitent_id,
+                                        'Descript' => $problem,
+                                        // 'NoteDate' => '2023-12-24 16:45',
+                                    ];
+                                    $addProblem = insert('TOOTH_PROBLEM', $dataProblem);
+                                }
+                                $tooth_problems = getAllByKeyValue('TOOTH_PROBLEM', 'ID_Customer', $paitent_id);
+                            }
+                            ?>
+                            <div class="container__heading-search">
+                                <input type="text" class="heading-search__area" placeholder="Descript" name="problem_text">
                                     <button class="btn-control btn-control-search" name="btn-add-problem">
                                         <i class="fa-solid fa-tooth btn-control-icon"></i>
                                         Add
@@ -108,26 +126,65 @@ require_once('./partials/_head.php');
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
+                                <?php
+                                    // $count = sizeof($tooth_problems['data']);
+                                    // echo $tooth_problems['status'];
+                                    // if($count > 0)
+                                    if($tooth_problems['status'] != 'No Data Found')
+                                    {
+                                ?>
+                                        <?php  foreach($tooth_problems['data'] as $tooth_problem) 
+                                        {  
+                                        ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row">1</th> 
-                                        <th class="text-column" scope="row">12/12/2023 13:22</th> 
-                                        <th class="text-column" scope="row">Root Infection</th> 
+                                        <th class="text-column-emphasis" scope="row"><?php echo $paitent['data']['ID_Customer']; ?></th> 
+                                        <?php
+                                            $problem_time = $tooth_problem['NoteDate']->format('Y-m-d H:i');
+                                        ?>
+                                        <th class="text-column" scope="row"><?php echo $problem_time?></th> 
+                                        <th class="text-column" scope="row"><?php echo $tooth_problem['Descript']?></th> 
                                     </tr>
-
+                                    <?php
+                                        }
+                                    }
+                                    else
+                                    {?>
+                                       <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                    <?php    
+                                    }
+                                    ?>
+                               
                                 </tbody>
                             </table>
 
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
 
             <!-- Contraindication -->
             <div class="container">
                 <div class="container-recent">
+                <form method="POST" action="">
                     <div class="container-recent-inner">
                         <div class="container-recent__heading">
                             <p class="recent__heading-title">Contraindication</p>
+                            <?php
+                            if(isset($_POST["btn-add-contraindication"]))
+                            {
+                                $medicine_id = $_POST["contraindication_text"];
+                                if(!empty($medicine_id))
+                                {
+                                    $dataCI = [
+                                        'ID_Customer' => $paitent_id,
+                                        'ID_Medicine' => $medicine_id,
+                                    ];
+                                    $addCI = insert('CONTRAINDICATION', $dataCI);
+                                }
+                                $contraindications = getAllByKeyValue('CONTRAINDICATION', 'ID_Customer', $paitent_id);
+                            }
+                            ?>
                             <div class="container__heading-search">
                                 <input type="text" class="heading-search__area" placeholder="Medicine Id" name="contraindication_text">
                                     <button class="btn-control btn-control-search" name="btn-add-contraindication">
@@ -147,26 +204,45 @@ require_once('./partials/_head.php');
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
+                                <?php
+                                    // $count = sizeof($contraindications['data']);
+                                    //     if($count > 0)
+                                    if($contraindications['status'] != 'No Data Found')
+                                    {
+                                    ?>
+                                        <?php  foreach($contraindications['data'] as $contraindication) 
+                                        {  
+                                        ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row">1</th> 
-                                        <th class="text-column" scope="row">12</th> 
+                                        <th class="text-column-emphasis" scope="row"><?php echo $paitent['data']['ID_Customer']; ?></th> 
+                                        <th class="text-column" scope="row"><?php echo $contraindication['ID_Medicine']; ?></th> 
                                     </tr>
-
+                                    <?php
+                                        }
+                                    }
+                                    else
+                                    {?>
+                                    <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                    <?php    
+                                    }
+                                ?>
                                 </tbody>
                             </table>
 
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
 
             <!-- Select Treatment -->
             <div class="container">
                 <div class="container-recent">
+                <!-- <form method="POST" action="../../Controller/AdminController/add_toothproblem.php"> -->
                     <div class="container-recent-inner">
                         <div class="container-recent__heading">
                             <p class="recent__heading-title">Treatment Plan</p>
-                            <a href="add_treatmentplans.php" class="btn-control btn-control-add">
+                            <a href="add_treatmentplans.php?id=<?php echo $paitent_id?>" class="btn-control btn-control-add">
                                 <i class="fa-solid fa-square-check btn-control-icon"></i>
                                 Add new plan
                             </a>
@@ -186,30 +262,68 @@ require_once('./partials/_head.php');
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
+                                <?php
+                                    // $count = sizeof($selects['data']);
+                                    //echo $invoices['data'];
+                                    // if($count > 0)
+                                    if($selects['status'] != 'No Data Found')
+                                    {
+                                    ?>
+                                        <?php  foreach($selects['data'] as $select) 
+                                        {  
+                                        ?>
+
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row">1</th> 
-                                        <th class="text-column" scope="row">1</th> 
-                                        <th class="text-column" scope="row">2</th> 
-                                        <th class="text-column" scope="row">12/12/2023</th> 
-                                        <th class="text-column" scope="row">12</th> 
+                                        <th class="text-column-emphasis" scope="row"><?php echo $paitent['data']['ID_Customer']; ?></th> 
+                                        <th class="text-column" scope="row"><?php echo $select['ID_Select']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $select['ID_Dentist']?></th> 
+                                        <?php
+                                            $select_time = $select['DateSelect']->format('Y-m-d');
+                                        ?>
+                                        <th class="text-column" scope="row"><?php echo $select_time?></th> 
+                                        <th class="text-column" scope="row"><?php echo $select['ReturnDays']?></th> 
                                         <th class="text-column" scope="row">
-                                            <span class="badge badge-success">Đã hoàn thành</span>
-                                            <!-- <span class="badge badge-unsuccess">Đã hủy</span> -->
-                                            <!-- <span class="badge badge-plan">Kế hoạch</span> -->
+                                        <?php if($select['SelectionStatus'] == 'Planning')
+                                            {?>
+                                                <span class="badge badge-plan">Planning</span>
+                                            <?php
+                                            }
+                                            elseif($select['SelectionStatus'] == 'Completed')
+                                            {
+                                            ?>
+                                                <span class="badge badge-success">Completed</span>
+                                            <?php
+                                            }
+                                            else
+                                            {
+                                            ?>
+                                                <span class="badge badge-unsuccess">Canceled</span>
+                                            <?php
+                                            }
+                                        ?>
                                         </th> 
                                         <th class="text-column" scope="row">
-                                            <a href="update_treatmentplans.php" class="btn-control btn-control-edit">
+                                            <a href="update_treatmentplans.php?id=<?php echo $select['ID_Select']?>" class="btn-control btn-control-edit">
                                                 <i class="fa-solid fa-square-check btn-control-icon"></i>
                                                 View detail
                                             </a>
                                         </th>
                                     </tr>
-
+                                    <?php
+                                        }
+                                    }
+                                    else
+                                    {?>
+                                       <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                    <?php    
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
 
                         </div>
                     </div>
+                <!-- </form> -->
                 </div>
             </div>
 
