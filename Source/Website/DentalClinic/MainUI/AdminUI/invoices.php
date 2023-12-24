@@ -64,11 +64,11 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                                     $strKeyword = $_POST["search_text"];
                                     $invoices = searchByKeyword('INVOICE', $strKeyword);
                                     
-                                    // $count = sizeof($invoices['data']);
-                                    // if($count <= 0)
-                                    // {
-                                    //     redirect('add_invoices.php', 'No data found.', '');
-                                    // }
+                                    if($invoices['status'] == 'No Data Found')
+                                    {
+                                        $_SESSION['status'] = $invoices['status'];
+                                        $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice');
+                                    }
                                 }
                                 else
                                 {
@@ -114,9 +114,10 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                                         <?php
                                             $invoice_time = $invoice['InvoiceTime']->format(' H:i:s Y-m-d');
                                         ?>
-                                        <th class="text-column" scope="row"><?php echo $invoice_time?></th>                                        <th class="text-column" scope="row">
+                                        <th class="text-column" scope="row"><?php echo $invoice_time?></th>                                        
+                                        <th class="text-column" scope="row">
                                             <div class="text-column__action">
-                                                <a href="invoice_detail.php" class="btn-control btn-control-edit">
+                                                <a href="invoice_detail.php?id=<?php  echo $invoice['ID_Invoice']?>" class="btn-control btn-control-edit">
                                                     <i class="fa-solid fa-file-lines btn-control-icon"></i>
                                                     View Detail
                                                 </a>
