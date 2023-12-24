@@ -27,7 +27,7 @@ $rooms = getAll('ROOM');
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" action="../../Controller/AdminController/add_appointment.php">
+                            <form method="POST" action="../../../Controller/AdminController/add_appointment.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
@@ -41,7 +41,7 @@ $rooms = getAll('ROOM');
                                                     <?php  foreach($dentists['data'] as $dentist) 
                                                     {  
                                                     ?>
-                                                <option value="" class=""><?php echo $dentist['ID_User']?></option>
+                                                <option value="<?php echo $dentist['ID_User']?>" class=""><?php echo $dentist['ID_User']?></option>
                                                 <?php
                                                     }
                                                 }
@@ -57,27 +57,28 @@ $rooms = getAll('ROOM');
 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Paitent Id</label>
-                                            <select name="paitent_id" id="ptId" class="form-cotrol" onchange="getPaintent(this.value)">
+                                            <input type="number" name="paitent_id" class="form-control">
+                                            <!-- <select name="paitent_id" id="ptId" class="form-cotrol" onchange="getPaintent(this.value)"> -->
                                             <?php
-                                                $count = sizeof($paitents['data']);
-                                                if($count > 0)
-                                                {
+                                                // $count = sizeof($paitents['data']);
+                                                // if($count > 0)
+                                                // {
                                                 ?>
-                                                    <?php  foreach($paitents['data'] as $paitent) 
-                                                    {  
+                                                    <?php  //foreach($paitents['data'] as $paitent) 
+                                                    // {  
                                                     ?>
-                                                <option class=""><?php echo $paitent['ID_Customer']?></option>
+                                                <!-- <option value="<?php //echo $paitent['ID_Customer']?>" class=""><?php //echo $paitent['ID_Customer']?></option> -->
                                                 <?php
-                                                    }
-                                                }
-                                                else
-                                                {
+                                                //     }
+                                                // }
+                                                // else
+                                                // {
                                                     ?>
-                                                    <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                                    <!-- <th class="text-column" scope="row"><?php //echo 'No Data Found'?></th>  -->
                                                     <?php
-                                                }
+                                                //}
                                             ?>
-                                            </select>
+                                            <!-- </select> -->
                                         </div>
                                         
                                         <div class="form-col">
@@ -91,7 +92,7 @@ $rooms = getAll('ROOM');
                                                     <?php  foreach($rooms['data'] as $room) 
                                                     {  
                                                     ?>
-                                                <option class=""><?php echo $room['ID_Room']?></option>
+                                                <option value="<?php echo $room['ID_Room']?>" class=""><?php echo $room['ID_Room']?></option>
                                                 <?php
                                                     }
                                                 }
@@ -124,8 +125,8 @@ $rooms = getAll('ROOM');
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Appointment Status</label>
                                             <select name="appt_status" id="apptStatus" class="form-cotrol">
-                                                <option value="" class="">New</option>
-                                                <option value="" class="">Reassess</option>
+                                                <option value="New" class="">New</option>
+                                                <option value="Reassess" class="">Reassess</option>
                                             </select>
                                         </div>
 
