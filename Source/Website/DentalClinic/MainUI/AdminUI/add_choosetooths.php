@@ -1,5 +1,6 @@
 <?php
 require_once('./partials/_head.php');
+$select_id = $_GET['id'];
 ?>
 
 <body>
@@ -24,34 +25,34 @@ require_once('./partials/_head.php');
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" class="">
+                            <form method="POST" action="../../Controller/AdminController/add_choosetooth.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Select Id</label>
-                                            <input type="text" name="select_id" class="form-control" readonly value>
+                                            <input type="text" name="select_id" class="form-control" readonly value="<?php echo $select_id?>">
                                         </div>
 
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Tooth Id</label>
-                                            <select name="tooth_id" id="toothId" class="form-cotrol" onchange="getTooth(this.value)">
-                                                <option value="" class="">1</option>
-                                                <option value="" class="">2</option>
-                                                <option value="" class="">3</option>
-                                                <option value="" class="">4</option>
+                                            <select name="tooth_id" id="toothId" class="form-cotrol">
+                                                <option value="1" class="">1</option>
+                                                <option value="2" class="">2</option>
+                                                <option value="3" class="">3</option>
+                                                <option value="4" class="">4</option>
                                             </select>
                                         </div>
 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Surface Id</label>
-                                            <select name="surface_id" id="surfaceId" class="form-cotrol" onchange="getSurface(this.value)">
-                                                <option value="" class="">Lingual</option>
-                                                <option value="" class="">Facial</option>
-                                                <option value="" class="">Distal</option>
-                                                <option value="" class="">Medial</option>
-                                                <option value="" class="">Top</option>
-                                                <option value="" class="">Root</option>
+                                            <select name="surface_id" id="surfaceId" class="form-cotrol">
+                                                <option value="Lingual" class="">Lingual</option>
+                                                <option value="Facial" class="">Facial</option>
+                                                <option value="Distal" class="">Distal</option>
+                                                <option value="Medial" class="">Medial</option>
+                                                <option value="Top" class="">Top</option>
+                                                <option value="Root" class="">Root</option>
                                             </select>
                                         </div>
                                     </div>
@@ -63,7 +64,7 @@ require_once('./partials/_head.php');
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Price ($)</label>
-                                            <input type="text" name="choosetooth_price" class="form-control" value>
+                                            <input type="number" name="choosetooth_price" class="form-control" value>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +74,7 @@ require_once('./partials/_head.php');
                                 <div class="form-row">
                                     <div class="form-col margin-0">
                                         <div class="form-col-bottom">
-                                            <input type="submit" name="addChooseTooth" value="Add Choose Tooth" class="btn-control btn-control-add" value="">
+                                            <input type="submit" name="btn-add-choosetooth" value="Add Choose Tooth" class="btn-control btn-control-add">
                                         </div>
                                     </div>
                                 </div>
