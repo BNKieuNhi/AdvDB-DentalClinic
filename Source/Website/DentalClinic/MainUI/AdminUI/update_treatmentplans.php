@@ -1,10 +1,11 @@
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
+
+$select_id = $_GET['id'];
+$select = getbyKeyValue('SELECT_TREATMENT', 'ID_Select', $select_id);
+$dentists = getIdbyUserType('USER_DENTAL', 'Dentist');
+$choose_tooths = getAllByKeyValue('CHOOSE_TOOTH', 'ID_Select', $select_id);
+$choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_id);
 ?>
 
 <body>
@@ -32,25 +33,42 @@ require_once('./partials/_head.php');
                             <form method="POST" class="">
                                 <div class="form-row">
                                     <div class="form-row__flex">
-                                        <!-- <div class="form-col">
+                                        <div class="form-col">
                                             <label for="" class="form-col__label">Select Treatment Id</label>
-                                            <select name="select_id" id="selectId" class="form-cotrol" onchange="getSelect(this.value)">
-                                                <option value="" class="">1</option>
-                                                <option value="" class="">2</option>
-                                            </select>
-                                        </div> -->
+                                            <input type="text" name="select_id" class="form-control" readonly value="<?php echo $select_id?>">
+                                        </div>
 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Paitent Id</label>
-                                            <input type="text" name="paitent_id" class="form-control" readonly value>
+                                            <input type="text" name="paitent_id" class="form-control" readonly value="<?php echo $select['data']['ID_Customer']?>">
                                         </div>
 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Dentist Id</label>
-                                            <select name="dentist_id" id="dentistId" class="form-cotrol" onchange="getDentist(this.value)">
-                                                <option value="" class="">1</option>
-                                                <option value="" class="">2</option>
-                                            </select>
+                                            <input type="text" name="select_returndays" class="form-control" value="<?php echo $select['data']['ID_Dentist']?>">
+                                            <!-- <select name="dentist_id" id="dentistId" class="form-cotrol" onchange="getDentist(this.value)"> -->
+                                                <!-- <option value="" class="">1</option>
+                                                <option value="" class="">2</option> -->
+                                                <?php
+                                                // $count = sizeof($dentists['data']);
+                                                // if($count > 0)
+                                                // {
+                                                ?>
+                                                    <?php  //foreach($dentists['data'] as $dentist) 
+                                                    //{  
+                                                    ?>
+                                                <!-- <option class=""><?php //echo $dentist['ID_User']?></option> -->
+                                                <?php
+                                                //     }
+                                                // }
+                                                // else
+                                                // {
+                                                    ?>
+                                                    <!-- <th class="text-column" scope="row"><?php //echo 'No Data Found'?></th>  -->
+                                                    <?php
+                                                // }
+                                            ?>
+                                            <!-- </select> -->
                                         </div>
                                     </div>
                                 </div>
@@ -61,20 +79,39 @@ require_once('./partials/_head.php');
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Date Time</label>
-                                            <input type="text" name="select_datetime" class="form-control" value>
+                                            <input type="datetime-local" name="select_datetime" class="form-control" value="<?php //echo $select['data']['DateTime']?>">
                                         </div>
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Return Days</label>
-                                            <input type="text" name="select_returndays" class="form-control" value>
+                                            <input type="text" name="select_returndays" class="form-control" value="<?php echo $select['data']['ReturnDays']?>">
                                         </div>
                                                                                 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Select Treatment Status</label>
-                                            <select name="select_status" id="selectStatus" class="form-cotrol" onchange="getStatus(this.value)">
-                                                <option value="" class="">Đã hoàn thành</option>
-                                                <option value="" class="">Đã hủy</option>
-                                                <option value="" class="">Kế hoạch</option>
+                                            <select name="select_status" id="selectStatus" class="form-cotrol">
+                                            <?php if($select['data']['SelectionStatus'] == 'Planning')
+                                                { ?>
+                                                    <option value="Planning" >Planning</option>
+                                                    <option value="Completed" selected>Completed</option>
+                                                    <option value="Canceled" selected>Canceled</option>
+                                                <?php 
+                                                } 
+                                                elseif($select['data']['SelectionStatus'] == 'Completed')
+                                                { ?>
+                                                    <option value="Completed" selected>Completed</option>
+                                                    <option value="Canceled" >Canceled</option>
+                                                    <option value="Planning" >Planning</option>
+                                                <?php 
+                                                } 
+                                                else
+                                                { ?>
+                                                    <option value="Canceled" >Canceled</option>
+                                                    <option value="Completed" selected>Completed</option>
+                                                    <option value="Planning" >Planning</option>
+                                                <?php 
+                                                }
+                                                ?> 
                                             </select>
                                         </div>
 
@@ -86,7 +123,7 @@ require_once('./partials/_head.php');
                                 <div class="form-row">
                                     <div class="form-col margin-0">
                                         <div class="form-col-bottom">
-                                            <input type="submit" name="updateSelect" value="Update Select Treatment" class="btn-control btn-control-add" value="">
+                                            <input type="submit" name="updatePlan" value="Update Treatment Plan" class="btn-control btn-control-add" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +141,7 @@ require_once('./partials/_head.php');
                     <div class="container-recent-inner">
                         <div class="container-recent__heading">
                             <p class="recent__heading-title">Choose Tooth</p>
-                            <a href="add_choosetooths.php" class="btn-control btn-control-add">
+                            <a href="add_choosetooths.php?id=<?php echo $select_id?>" class="btn-control btn-control-add">
                                 <i class="fa-solid fa-tooth btn-control-icon"></i>
                                 Add tooth
                             </a>
@@ -122,11 +159,18 @@ require_once('./partials/_head.php');
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
+                                <?php
+                                    if($choose_tooths['status'] != 'No Data Found')
+                                    {
+                                    ?>
+                                        <?php  foreach($choose_tooths['data'] as $choose_tooth) 
+                                        {  
+                                        ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row">1</th> 
-                                        <th class="text-column-emphasis" scope="row">1</th> 
-                                        <th class="text-column" scope="row">Distal</th> 
-                                        <th class="text-column" scope="row">13</th> 
+                                        <th class="text-column-emphasis" scope="row"><?php echo $choose_tooth['ID_Select']?></th> 
+                                        <th class="text-column-emphasis" scope="row"><?php echo $choose_tooth['ID_Tooth']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $choose_tooth['ID_Surface']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $choose_tooth['Price']?></th> 
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
                                                 <button class="btn-control btn-control-delete" name="btn-delete">
@@ -136,7 +180,15 @@ require_once('./partials/_head.php');
                                             </div>
                                         </th> 
                                     </tr>
-
+                                    <?php
+                                        }
+                                    }
+                                    else
+                                    {?>
+                                    <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                    <?php    
+                                    }
+                                ?>
                                 </tbody>
                             </table>
 
@@ -151,7 +203,7 @@ require_once('./partials/_head.php');
                     <div class="container-recent-inner">
                         <div class="container-recent__heading">
                             <p class="recent__heading-title">Choose treatment</p>
-                            <a href="add_choosetreatments.php" class="btn-control btn-control-add">
+                            <a href="add_choosetreatments.php?id=<?php echo $select_id?>" class="btn-control btn-control-add">
                                 <i class="fa-solid fa-square-plus btn-control-icon"></i>
                                 Add treatment
                             </a>
@@ -168,10 +220,17 @@ require_once('./partials/_head.php');
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
+                                <?php
+                                    if($choose_treatments['status'] != 'No Data Found')
+                                    {
+                                    ?>
+                                        <?php  foreach($choose_treatments['data'] as $choose_treatment) 
+                                        {  
+                                        ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row">1</th> 
-                                        <th class="text-column-emphasis" scope="row">1</th> 
-                                        <th class="text-column" scope="row">12</th> 
+                                        <th class="text-column-emphasis" scope="row"><?php echo $choose_treatment['ID_Select']?></th> 
+                                        <th class="text-column-emphasis" scope="row"><?php echo $choose_treatment['ID_Treatment']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $choose_treatment['Price']?></th> 
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
                                                 <button class="btn-control btn-control-delete" name="btn-delete">
@@ -181,7 +240,15 @@ require_once('./partials/_head.php');
                                             </div>
                                         </th> 
                                     </tr>
-
+                                    <?php
+                                        }
+                                    }
+                                    else
+                                    {?>
+                                    <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                    <?php    
+                                    }
+                                ?>
                                 </tbody>
                             </table>
 
