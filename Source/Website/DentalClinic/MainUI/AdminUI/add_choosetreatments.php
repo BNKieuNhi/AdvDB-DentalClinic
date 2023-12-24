@@ -36,7 +36,7 @@ $treatments = getAll('TREATMENT');
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Treatment Id</label>
-                                            <select name="treatment_id" id="treatmentId" class="form-cotrol" onChange="getTreatmentId(this.value)">
+                                            <select name="treatment_id" id="treatmentId" class="form-cotrol">
                                             <?php  foreach($treatments['data'] as $treatment) 
                                             {  
                                             ?>
