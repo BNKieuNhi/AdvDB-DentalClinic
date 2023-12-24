@@ -36,27 +36,10 @@ $payments = getAll('PAYMENT_METHOD');
                                         </div>
 
                                         <div class="form-col">
-                                            <label for="" class="form-col__label">Payment Id</label>
+                                            <label for="" class="form-col__label">Payment</label>
                                             <select name="payment_id" id="paymentId" class="form-cotrol">
-                                            <?php
-                                                $count = sizeof($payments['data']);
-                                                if($count > 0)
-                                                {
-                                                ?>
-                                                    <?php  foreach($payments['data'] as $payment) 
-                                                    {  
-                                                    ?>
-                                                <option class=""><?php echo $payment['ID_Payment']?></option>
-                                                <?php
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    ?>
-                                                    <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
-                                                    <?php
-                                                }
-                                            ?>
+                                                <option value="1" class="">Cash</option>
+                                                <option value="2" class="">Momo</option>
                                             </select>
                                         </div>
                                         
