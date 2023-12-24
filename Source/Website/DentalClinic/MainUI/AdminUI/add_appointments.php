@@ -32,7 +32,7 @@ $rooms = getAll('ROOM');
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Dentist Id</label>
-                                            <select name="dentist_id" id="dentistId" class="form-cotrol">
+                                            <select name="dentist_id" id="dentistId" class="form-cotrol" onchange="getDentist(this.value)">
                                             <?php
                                                 $count = sizeof($dentists['data']);
                                                 if($count > 0)
@@ -41,7 +41,7 @@ $rooms = getAll('ROOM');
                                                     <?php  foreach($dentists['data'] as $dentist) 
                                                     {  
                                                     ?>
-                                                <option class=""><?php echo $dentist['ID_User']?></option>
+                                                <option value="" class=""><?php echo $dentist['ID_User']?></option>
                                                 <?php
                                                     }
                                                 }
@@ -57,7 +57,7 @@ $rooms = getAll('ROOM');
 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Paitent Id</label>
-                                            <select name="paitent_id" id="ptId" class="form-cotrol">
+                                            <select name="paitent_id" id="ptId" class="form-cotrol" onchange="getPaintent(this.value)">
                                             <?php
                                                 $count = sizeof($paitents['data']);
                                                 if($count > 0)
@@ -82,7 +82,7 @@ $rooms = getAll('ROOM');
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Room</label>
-                                            <select name="room_id" id="roomId" class="form-cotrol"">
+                                            <select name="room_id" id="roomId" class="form-cotrol" onchange="getRoom(this.value)">
                                             <?php
                                                 $count = sizeof($rooms['data']);
                                                 if($count > 0)
