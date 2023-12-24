@@ -1,5 +1,7 @@
 <?php
 require_once('./partials/_head.php');
+$select_id = $_GET['id'];
+$treatments = getAll('TREATMENT');
 ?>
 
 <body>
@@ -24,19 +26,24 @@ require_once('./partials/_head.php');
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" class="">
+                            <form method="POST" action="../../Controller/AdminController/add_choosetreatment.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Select Id</label>
-                                            <input type="text" name="select_id" class="form-control" readonly value>
+                                            <input type="text" name="select_id" class="form-control" readonly value="<?php echo $select_id?>">
                                         </div>
-
                                         
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Treatment Id</label>
-                                            <select name="treatment_id" id="treatmentId" class="form-cotrol" onchange="getTreatment(this.value)">
-                                                <option value="" class="">1</option>
+                                            <select name="treatment_id" id="treatmentId" class="form-cotrol" onChange="getTreatmentId(this.value)">
+                                            <?php  foreach($treatments['data'] as $treatment) 
+                                            {  
+                                            ?>
+                                                <option value="<?php echo $treatment['ID_Treatment']?>" class=""><?php echo $treatment['ID_Treatment']?></option>
+                                            <?php
+                                            }
+                                            ?>
                                             </select>
                                         </div>
                                     </div>
@@ -48,7 +55,7 @@ require_once('./partials/_head.php');
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Price ($)</label>
-                                            <input type="text" name="choosetreatment_price" class="form-control" value>
+                                            <input type="number" name="choosetreatment_price" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +65,7 @@ require_once('./partials/_head.php');
                                 <div class="form-row">
                                     <div class="form-col margin-0">
                                         <div class="form-col-bottom">
-                                            <input type="submit" name="addChooseTreatment" value="Add Choose Treatment" class="btn-control btn-control-add" value="">
+                                            <input type="submit" name="btn-add-choosetreatment" value="Add Choose Treatment" class="btn-control btn-control-add" value="">
                                         </div>
                                     </div>
                                 </div>
