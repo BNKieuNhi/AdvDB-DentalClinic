@@ -14,7 +14,7 @@
         {
             $dataCT = [
                 'ID_Select' => $select_id,
-                'ID_Tooth' => $treatment_id,
+                'ID_Treatment' => $treatment_id,
                 'Price' => $choosetreatment_price,
             ];
 
