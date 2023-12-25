@@ -157,15 +157,15 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                                         ?>
                                         <th class="text-column" scope="col"><?php echo $problem_time?></th> 
                                         <th class="text-column" scope="col"><?php echo $tooth_problem['Descript']?></th> 
-                                    </tr>
-                                    <th class="text-column" scope="col">
+                                        <th class="text-column" scope="col">
                                             <div class="text-column__action">
                                             <a href="../../Controller/AdminController/delete_toothproblem.php?id=<?php echo $paitent['data']['ID_Customer'];?>&Description=<?php echo $tooth_problem['Descript'];?>" 
-                                                    class="btn-control btn-control-delete">
-                                                        <i class="fa-solid fa-trash-can btn-control-icon"></i>
-                                                        Delete
-                                                    </a>
+                                            class="btn-control btn-control-delete">
+                                                <i class="fa-solid fa-trash-can btn-control-icon"></i>
+                                                Delete
+                                            </a>
                                         </th> 
+                                    </tr>
                                     <?php
                                         }
                                     }
