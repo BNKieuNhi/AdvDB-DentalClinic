@@ -136,7 +136,7 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                                         <th class="text-column-emphasis" scope="col">Paitent Id</th> 
                                         <th class="text-column" scope="col">Note Date</th> 
                                         <th class="text-column" scope="col">Description</th> 
-                                        <th class="text-column" scope="col">Action</th> 
+                                        <th class="text-column" scope="col">ACTION</th> 
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -223,6 +223,7 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                                     <tr>
                                         <th class="text-column-emphasis" scope="col">Paitent Id</th> 
                                         <th class="text-column" scope="col">Medicine Id</th> 
+                                        <th class="text-column" scope="col">ACTION</th> 
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -237,7 +238,15 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                                         ?>
                                     <tr>
                                         <th class="text-column-emphasis" scope="row"><?php echo $paitent['data']['ID_Customer']; ?></th> 
-                                        <th class="text-column" scope="row"><?php echo $contraindication['ID_Medicine']; ?></th> 
+                                        <th class="text-column" scope="row"><?php echo $contraindication['ID_Medicine']; ?></th>
+                                        <th class="text-column" scope="col">
+                                            <div class="text-column__action">
+                                            <a href="../../Controller/AdminController/delete_contraindication.php?id=<?php echo $paitent['data']['ID_Customer'];?>&medicine=<?php echo $contraindication['ID_Medicine'];?>" 
+                                            class="btn-control btn-control-delete">
+                                                <i class="fa-solid fa-trash-can btn-control-icon"></i>
+                                                Delete
+                                            </a>
+                                        </th>  
                                     </tr>
                                     <?php
                                         }

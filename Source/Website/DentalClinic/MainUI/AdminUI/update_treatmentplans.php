@@ -172,10 +172,11 @@ $choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_i
                                         <th class="text-column" scope="row"><?php echo $choose_tooth['Price']?></th> 
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
-                                                <button class="btn-control btn-control-delete" name="btn-delete">
+                                                <a href="../../Controller/AdminController/delete_chooseTooth.php?id=<?php echo $choose_tooth['ID_Select'];?>&tooth_id=<?php echo $choose_tooth['ID_Tooth'];?>&surface_id=<?php echo $choose_tooth['ID_Surface'];?>" 
+                                                class="btn-control btn-control-delete">
                                                     <i class="fa-solid fa-trash-can btn-control-icon"></i>
                                                     Delete
-                                                </button>
+                                                </a>
                                             </div>
                                         </th> 
                                     </tr>
@@ -232,10 +233,11 @@ $choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_i
                                         <th class="text-column" scope="row"><?php echo $choose_treatment['Price']?></th> 
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
-                                                <button class="btn-control btn-control-delete" name="btn-delete">
+                                            <a href="../../Controller/AdminController/delete_chooseTreatment.php?id=<?php echo $choose_treatment['ID_Select'];?>&treatment_id=<?php echo $choose_treatment['ID_Treatment'];?>" 
+                                                class="btn-control btn-control-delete">
                                                     <i class="fa-solid fa-trash-can btn-control-icon"></i>
                                                     Delete
-                                                </button>
+                                                </a>
                                             </div>
                                         </th> 
                                     </tr>

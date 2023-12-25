@@ -1,10 +1,14 @@
+<?php
+    //session_start();
+    //include("../config/config.php");
+?>
 <div class="navbar navbar-top navbar-expand-md">
     <div class="container container-header">
         <a href="dashboard.php" class="h4 container__dashboard-name">SYSTEM ADMIN DASHBOARD</a>
 
         <li class="navbar-user">
-            <img src="http://localhost/RestaurantPOS/Restro/admin/assets/img/theme/user-a-min.png" alt="" class="navbar-user-img">
-            <span class="navbar-user-name">Sơn Đặng</span>
+            <img src="" alt="" class="navbar-user-img">
+            <span class="navbar-user-name"><?php echo $_SESSION['auth_user']['fullname']?></span>
 
             <ul class="navbar-user-menu">
                 <li class="navbar-nav__item">
