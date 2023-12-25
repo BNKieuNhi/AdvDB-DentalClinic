@@ -9,7 +9,7 @@
         if(empty($_POST['staff_name']) || empty($_POST['staff_gender']) || empty($_POST['staff_address']) || empty($_POST['staff_phone'])
           || empty($_POST['user_name']))
         {
-            redirect('../../AdminUI/update_staff.php?id='.$staff_id, 'All fields are required.', '');
+            redirect('../../MainUI/AdminUI/update_staffs.php?id='.$staff_id, 'All fields are required.', '');
             exit(0);
         }
         else
@@ -29,7 +29,7 @@
             else
             {
                 $staff = getbyKeyValue('ACCOUNT', 'Username', $username);
-                $password = $staff['data']['password'];
+                $password = $staff['data']['Pass_word'];
             }
 
             $dataAccount = [
@@ -50,7 +50,7 @@
             // echo '<br>';
             // echo $updateUser['query'];
 
-            if($updateAccount && $updateUser)
+            if($updateAccount['status'] && $updateUser['status'])
             {
                 redirect('../../MainUI/AdminUI/staffs.php', '', "You've modified staff successfully!");
             }

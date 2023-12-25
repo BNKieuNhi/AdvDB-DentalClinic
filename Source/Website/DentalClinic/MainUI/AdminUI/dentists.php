@@ -62,6 +62,12 @@
                                 {
                                     $strKeyword = $_POST["search_text"];
                                     $dentists = searchUserByKeyword('USER_DENTAL', $strKeyword, 'Dentist');
+
+                                    if($dentists['status'] == 'No Data Found')
+                                    {
+                                        $_SESSION['status'] = $dentists['status'];
+                                        $dentists = getByUserTypeWithPagination('USER_DENTAL', 'Dentist', $pageSize, $pageNumber, 'ID_User');
+                                    }
                                 }
                                 else
                                 {
@@ -86,7 +92,8 @@
                                         <th class="text-column" scope="col">FULL NAME</th> 
                                         <th class="text-column" scope="col">Gender</th> 
                                         <th class="text-column" scope="col">Phone Number</th> 
-                                        <th class="text-column" scope="col">Address</th> 
+                                        <th class="text-column" scope="col">Address</th>
+                                        <th class="text-column" scope="col">Status</th>  
                                         <th class="text-column" scope="col">ACTION</th> 
                                     </tr>
                                 </thead>
@@ -101,7 +108,7 @@
                                         {  
                                         ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row"><?php echo $dentist['ID_User']?></th>
+                                        <th class="text-column-emphasis" scope="row"><?php echo $dentist['ID']?></th>
                                         <th class="text-column" scope="row"><?php echo $dentist['Username']?></th>
                                         <th class="text-column" scope="row"><?php echo $dentist['Fullname']?></th> 
                                         <?php if($dentist['Gender'] = 'F')
@@ -117,14 +124,32 @@
                                             }
                                         ?>
                                         <th class="text-column" scope="row"><?php echo $dentist['PhoneNumber']?></th> 
-                                        <th class="text-column" scope="row"><?php echo $dentist['CurrAddress']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $dentist['CurrAddress']?></th>
+                                        <?php  $dentist_status = getbyKeyValue('ACCOUNT', 'Username', $dentist['Username']);
+                                            if($dentist_status['data']['isActive'] == 'Yes') 
+                                        {?>
+                                            <th class="text-column" scope="row">
+                                                <span class="badge badge-success">Active</span>
+                                            </th> 
+                                        <?php
+                                        }
+                                            else
+                                            {
+                                            ?>
+                                            <th class="text-column" scope="row">
+                                                <span class="badge badge-unsuccess">Deleted</span>
+                                            </th> 
+                                            <?php
+                                            }
+                                        ?> 
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
-                                                <button class="btn-control btn-control-delete" name="btn-delete">
-                                                    <i class="fa-solid fa-trash-can btn-control-icon"></i>
-                                                    Delete
-                                                </button>
-                                                <a href="update_dentists.php" class="btn-control btn-control-edit">
+                                                <a href="../../Controller/AdminController/delete_dentist.php?id=<?php  echo $dentist['ID_User']?>" 
+                                                    class="btn-control btn-control-delete">
+                                                        <i class="fa-solid fa-trash-can btn-control-icon"></i>
+                                                        Delete
+                                                </a>
+                                                <a href="update_dentists.php?id=<?php  echo $dentist['ID_User']?>" class="btn-control btn-control-edit">
                                                     <i class="fa-solid fa-user-pen btn-control-icon"></i>
                                                     Update
                                                 </a>

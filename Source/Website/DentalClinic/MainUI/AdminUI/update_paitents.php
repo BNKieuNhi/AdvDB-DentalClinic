@@ -29,24 +29,35 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" class="">
+                            <form method="POST" action="../../Controller/AdminController/update_patient.php">
+                            <input type="hidden" name="patient_id" value="<?php echo $paitent['data']['ID_Customer']; ?>">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Paitent Name</label>
-                                            <input type="text" name="paitent_name" class="form-control" value="LJCH-7436">
+                                            <input type="text" name="patient_name" class="form-control" value="<?php echo $paitent['data']['Fullname']?>">
                                         </div>
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Gender</label>
-                                            <select name="paitent_gender" id="ptGender" class="form-cotrol">
-                                                <option value="" class="">Select Gender</option>
-                                                <option value="" class="">Nam</option>
-                                                <option value="" class="">Nữ</option>
+                                            <select name="patient_gender" id="ptGender" class="form-cotrol">
+                                            <?php if($paitent['data']['Gender'] == 'F')
+                                                { ?>
+                                                    <option value="M" >Male</option>
+                                                    <option value="F" selected>Female</option>
+                                                <?php 
+                                                } 
+                                                else
+                                                { ?>
+                                                    <option value="M" selected>Male</option>
+                                                    <option value="F" >Female</option>
+                                                <?php 
+                                                } 
+                                                ?> 
                                             </select>
                                         </div>
                                         <div class="form-col">
-                                            <label for="" class="form-col__label">Paitent Phone Number</label>
-                                            <input type="text" name="paintent_phone" class="form-control" value>
+                                            <label for="" class="form-col__label">Phone Number</label>
+                                            <input type="text" name="patient_phone" class="form-control" value="<?php echo $paitent['data']['PhoneNumber']?>">
                                         </div>
                                     </div>
                                 </div>
@@ -57,12 +68,14 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                                     <div class="form-row__flex">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Paitent Address</label>
-                                            <input type="text" name="paitent_address" class="form-control" value="Street 5">
+                                            <input type="text" name="patient_address" class="form-control" value="<?php echo $paitent['data']['CurrAddress']?>">
                                         </div>
-
+                                        <?php
+                                            $paitent_dob = $paitent['data']['DOB']->format('Y-m-d');
+                                        ?>
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Date Of Birth</label>
-                                            <input type="date" name="paitent_dob" class="form-control" value>
+                                            <input type="date" name="patient_dob" class="form-control" value="<?php echo $paitent_dob?>">
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +85,7 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                                 <div class="form-row">
                                     <div class="form-col margin-0">
                                         <div class="form-col-bottom">
-                                            <input type="submit" name="updatePaitent" value="Update Paitent" class="btn-control btn-control-add" value="">
+                                            <input type="submit" name="btn-updatePaitent" value="Update Paitent" class="btn-control btn-control-add">
                                         </div>
                                     </div>
                                 </div>
@@ -123,6 +136,7 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                                         <th class="text-column-emphasis" scope="col">Paitent Id</th> 
                                         <th class="text-column" scope="col">Note Date</th> 
                                         <th class="text-column" scope="col">Description</th> 
+                                        <th class="text-column" scope="col">Action</th> 
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -137,13 +151,21 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                                         {  
                                         ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row"><?php echo $paitent['data']['ID_Customer']; ?></th> 
+                                        <th class="text-column-emphasis" scope="col"><?php echo $paitent['data']['ID_Customer']; ?></th> 
                                         <?php
                                             $problem_time = $tooth_problem['NoteDate']->format('Y-m-d H:i');
                                         ?>
-                                        <th class="text-column" scope="row"><?php echo $problem_time?></th> 
-                                        <th class="text-column" scope="row"><?php echo $tooth_problem['Descript']?></th> 
+                                        <th class="text-column" scope="col"><?php echo $problem_time?></th> 
+                                        <th class="text-column" scope="col"><?php echo $tooth_problem['Descript']?></th> 
                                     </tr>
+                                    <th class="text-column" scope="col">
+                                            <div class="text-column__action">
+                                            <a href="../../Controller/AdminController/delete_toothproblem.php?id=<?php echo $paitent['data']['ID_Customer'];?>&Description=<?php echo $tooth_problem['Descript'];?>" 
+                                                    class="btn-control btn-control-delete">
+                                                        <i class="fa-solid fa-trash-can btn-control-icon"></i>
+                                                        Delete
+                                                    </a>
+                                        </th> 
                                     <?php
                                         }
                                     }
@@ -153,7 +175,7 @@ $selects = getAllByKeyValue('SELECT_TREATMENT', 'ID_Customer', $paitent_id);
                                     <?php    
                                     }
                                     ?>
-                               
+
                                 </tbody>
                             </table>
 

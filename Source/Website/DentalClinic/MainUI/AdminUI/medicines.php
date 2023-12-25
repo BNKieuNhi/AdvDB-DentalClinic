@@ -81,6 +81,7 @@
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
+                                        
                                         <th class="text-column-emphasis" scope="col">Medicine Id</th> 
                                         <th class="text-column" scope="col">Medicine Name</th> 
                                         <th class="text-column" scope="col">Price ($)</th> 
@@ -99,17 +100,12 @@
                                         {  
                                         ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row"><?php echo $medicine['ID_Medicine']?></th>
+                                        <th class="text-column-emphasis" scope="row"><?php echo $medicine['ID']?></th>
                                         <th class="text-column" scope="row"><?php echo $medicine['MedicineName']?></th>
                                         <th class="text-column" scope="row"><?php echo $medicine['Price']?></th> 
  
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
-                                                <a href="../../Controller/AdminController/delete_medicine.php?id=<?php  echo $medicine['ID_Medicine']?>" 
-                                                    class="btn-control btn-control-delete">
-                                                        <i class="fa-solid fa-trash-can btn-control-icon"></i>
-                                                        Delete
-                                                </a>
                                                 <a href="update_medicines.php?id=<?php  echo $medicine['ID_Medicine']?>" class="btn-control btn-control-edit">
                                                     <i class="fa-solid fa-pills btn-control-icon"></i>
                                                     Update
@@ -129,34 +125,6 @@
 
                                 </tbody>
                             </table>
-                            <!-- <div class="pagination-container">
-                                <ul class="pagination">
-                                    <?php
-                                        // $totalPages = ceil($medicines['total'] / $pageSize);
-                                        // $maxPagesToShow = 4;
-                                        // $halfMax = floor($maxPagesToShow / 2);
-
-                                        // // Hiển thị nút Previous
-                                        // if ($pageNumber > 1) {
-                                        //     echo '<li><a href="?page=' . ($pageNumber - 1) . '">&laquo; Previous</a>';
-                                        // } else {
-                                        //     echo '<li class="disabled"><span>&laquo; Previous</span>';
-                                        // }
-
-                                        // // Hiển thị các nút trang
-                                        // for ($i = max(1, $pageNumber - $halfMax); $i <= min($totalPages, $pageNumber + $halfMax); $i++) {
-                                        //     echo '<li class="' . ($i == $pageNumber ? 'active' : '') . '"><a href="?page=' . $i . '">' . $i . '</a></li>';
-                                        // }
-
-                                        // // Hiển thị nút Next
-                                        // if ($pageNumber < $totalPages) {
-                                        //     echo '<a href="?page=' . ($pageNumber + 1) . '">Next &raquo;</a>';
-                                        // } else {
-                                        //     echo '<a class="disabled"><span>Next &raquo;</span></a>';
-                                        // }
-                                    ?>
-                                </ul>
-                            </div> -->
                         </div>
                     </div>
                 </div>

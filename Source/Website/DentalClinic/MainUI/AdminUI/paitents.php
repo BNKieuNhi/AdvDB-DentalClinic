@@ -103,7 +103,7 @@
                                     <tr>
                                         <th class="text-column-emphasis" scope="row"><?php echo $paitent['ID_Customer']?></th>
                                         <th class="text-column" scope="row"><?php echo $paitent['Fullname']?></th>
-                                        <?php if($paitent['Gender'] = 'F')
+                                        <?php if($paitent['Gender'] == 'F')
                                             {?>
                                                 <th class="text-column" scope="row">Female</th> 
                                             <?php
@@ -119,10 +119,6 @@
                                         <th class="text-column" scope="row"><?php echo $paitent['CurrAddress']?></th> 
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
-                                                <button class="btn-control btn-control-delete" name="btn-delete">
-                                                    <i class="fa-solid fa-trash-can btn-control-icon"></i>
-                                                    Delete
-                                                </button>
                                                 <a href="update_paitents.php?id=<?php  echo $paitent['ID_Customer']?>" class="btn-control btn-control-edit">
                                                     <i class="fa-solid fa-user-pen btn-control-icon"></i>
                                                     View Detail

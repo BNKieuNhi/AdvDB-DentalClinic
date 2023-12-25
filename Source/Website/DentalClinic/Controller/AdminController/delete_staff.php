@@ -16,13 +16,19 @@
         }
         else
         {
-            echo "Here";
-            echo $staff['query'];
+            // echo "Here";
+            // echo $staff['query'];
 
-            $deleteStaff = delete('STAFF', 'ID_Staff', $staff_id);
-            $deleteUser = delete('USER_DENTAL', 'ID_User', $staff_id);
+            // $deleteStaff = delete('STAFF', 'ID_Staff', $staff_id);
+            // $deleteUser = delete('USER_DENTAL', 'ID_User', $staff_id);
 
-            if($deleteStaff['status'] && $deleteUser['status'])
+            $dataAccount = [
+                'isActive' => 'No',
+            ];
+
+            $updateAccount = updatebyKeyValue('ACCOUNT', 'Username', $staff['data']['Username'], $dataAccount);
+
+            if($updateAccount['status'])
             {
                 redirect('../../MainUI/AdminUI/staffs.php', '', "You've deleted staff {$staff['data']['fullname']} !");
             }

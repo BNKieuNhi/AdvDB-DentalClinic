@@ -1,10 +1,7 @@
 <?php
-// session_start();
-// include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
 require_once('./partials/_head.php');
-// require_once('./partials/_analytics.php');
+$medicine_id = $_GET['id'];
+$medicine = getbyKeyValue('MEDICINE', 'ID_Medicine', $medicine_id);
 ?>
 
 <body>
@@ -29,17 +26,18 @@ require_once('./partials/_head.php');
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" class="">
+                            <form method="POST" action="../../Controller/AdminController/update_medicine.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
+                                        <input type="hidden" name="medicine_id" value="<?php echo $medicine['data']['ID_Medicine']; ?>">
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Medicine Name</label>
-                                            <input type="text" name="medicine_name" class="form-control" value="LJCH-7436">
+                                            <input type="text" name="medicine_name" class="form-control" value="<?php echo $medicine['data']['MedicineName']; ?>">
                                         </div>
 
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Medicine Price ($)</label>
-                                            <input type="text" name="medicine_price" class="form-control" value>
+                                            <input type="text" name="medicine_price" class="form-control" value="<?php echo $medicine['data']['Price']; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +47,7 @@ require_once('./partials/_head.php');
                                 <div class="form-row">
                                     <div class="form-col margin-0">
                                         <div class="form-col-bottom">
-                                            <input type="submit" name="updateMedicine" value="Update Medicine" class="btn-control btn-control-add" value="">
+                                            <input type="submit" name="btn-updateMedicine" value="Update Medicine" class="btn-control btn-control-add">
                                         </div>
                                     </div>
                                 </div>

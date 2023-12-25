@@ -95,7 +95,7 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                         <th class="text-column" scope="col">Gender</th> 
                                         <th class="text-column" scope="col">Phone Number</th> 
                                         <th class="text-column" scope="col">Address</th> 
-                                        <!-- <th class="text-column" scope="col">DOB</th>  -->
+                                        <th class="text-column" scope="col">Status</th>  
                                         <th class="text-column" scope="col">ACTION</th> 
                                     </tr>
                                 </thead>
@@ -110,7 +110,7 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                         {  
                                         ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row"><?php echo $staff['ID_User']?></th>
+                                        <th class="text-column-emphasis" scope="row"><?php echo $staff['ID']?></th>
                                         <th class="text-column" scope="row"><?php echo $staff['Username']?></th>
                                         <th class="text-column" scope="row"><?php echo $staff['Fullname']?></th> 
                                         <?php if($staff['Gender'] == 'F')
@@ -126,7 +126,24 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                             }
                                         ?>
                                         <th class="text-column" scope="row"><?php echo $staff['PhoneNumber']?></th> 
-                                        <th class="text-column" scope="row"><?php echo $staff['CurrAddress']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $staff['CurrAddress']?></th>
+                                        <?php  $staff_status = getbyKeyValue('ACCOUNT', 'Username', $staff['Username']);
+                                            if($staff_status['data']['isActive'] == 'Yes') 
+                                        {?>
+                                            <th class="text-column" scope="row">
+                                                <span class="badge badge-success">Active</span>
+                                            </th> 
+                                        <?php
+                                        }
+                                            else
+                                            {
+                                            ?>
+                                            <th class="text-column" scope="row">
+                                                <span class="badge badge-unsuccess">Deleted</span>
+                                            </th> 
+                                            <?php
+                                            }
+                                        ?>  
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
                                             <a href="../../Controller/AdminController/delete_staff.php?id=<?php  echo $staff['ID_User']?>" 
