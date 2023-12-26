@@ -26,7 +26,7 @@
                         <div class="container-recent__heading heading__button">
                             <a href="add_paitents.php" class="btn-control btn-control-add">
                                 <i class="fa-solid fa-bed-pulse btn-control-icon"></i>
-                                Add new paitent
+                                Add new patient
                             </a>
 
                             <div class="pagination">
@@ -62,6 +62,12 @@
                                 {
                                     $strKeyword = $_POST["search_text"];
                                     $paitents = searchByKeyword('CUSTOMER', $strKeyword);
+
+                                    if($paitents['status'] == 'No Data Found')
+                                    {
+                                        $_SESSION['status'] = $paitents['status'];
+                                        $paitents = getAllWithPagination('CUSTOMER', $pageSize, $pageNumber, 'ID_Customer');
+                                    }
                                 }
                                 else
                                 {
@@ -81,7 +87,7 @@
                             <table class="table">
                                 <thead class="thead-light"> 
                                     <tr>
-                                        <th class="text-column-emphasis" scope="col">Id</th> 
+                                        <th class="text-column-emphasis" scope="col">Patient Id</th> 
                                         <th class="text-column" scope="col">FULL NAME</th> 
                                         <th class="text-column" scope="col">Gender</th> 
                                         <th class="text-column" scope="col">Phone Number</th> 

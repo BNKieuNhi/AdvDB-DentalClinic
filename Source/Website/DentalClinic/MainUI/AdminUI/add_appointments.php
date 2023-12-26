@@ -31,7 +31,7 @@ $rooms = getAll('ROOM');
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">
-                                            <label for="" class="form-col__label">Dentist Id</label>
+                                            <label for="" class="form-col__label">Dentist Name</label>
                                             <select name="dentist_id" id="dentistId" class="form-cotrol" onchange="getDentist(this.value)">
                                             <?php
                                                 $count = sizeof($dentists['data']);
@@ -41,7 +41,8 @@ $rooms = getAll('ROOM');
                                                     <?php  foreach($dentists['data'] as $dentist) 
                                                     {  
                                                     ?>
-                                                <option value="<?php echo $dentist['ID_User']?>" class=""><?php echo $dentist['ID_User']?></option>
+                                                <option value="<?php echo $dentist['ID_User']?>" class=""><?php echo $dentist['Fullname'];
+                                                                                                              echo " (ID_Dentist = {$dentist['ID_User']})" ?></option>
                                                 <?php
                                                     }
                                                 }
@@ -92,7 +93,8 @@ $rooms = getAll('ROOM');
                                                     <?php  foreach($rooms['data'] as $room) 
                                                     {  
                                                     ?>
-                                                <option value="<?php echo $room['ID_Room']?>" class=""><?php echo $room['ID_Room']?></option>
+                                                <option value="<?php echo $room['ID_Room']?>" class=""><?php echo $room['ID_Room'];
+                                                                                                            echo " (Floor = {$room['Floorr']})" ?></option>
                                                 <?php
                                                     }
                                                 }

@@ -88,9 +88,9 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th class="text-column-emphasis" scope="col">Id</th> 
+                                        <th class="text-column-emphasis" scope="col">Invoice Id</th> 
                                         <th class="text-column" scope="col">Select Treatment</th> 
-                                        <th class="text-column" scope="col">Payment Id</th> 
+                                        <th class="text-column" scope="col">Payment</th> 
                                         <th class="text-column" scope="col">Total ($)</th> 
                                         <th class="text-column" scope="col">Time</th> 
                                         <th class="text-column" scope="col">ACTIONS</th> 
@@ -107,9 +107,13 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                                         {  
                                         ?>
                                     <tr>
-                                        <th class="text-column-emphasis" scope="row"><?php echo $invoice['ID_Invoice']?></th>
+                                        <th class="text-column-emphasis" scope="row"><?php echo $invoice['ID']?></th>
                                         <th class="text-column" scope="row"><?php echo $invoice['ID_Select']?></th>
-                                        <th class="text-column" scope="row"><?php echo $invoice['ID_Payment']?></th>
+                                        <?php
+                                            $payment = getbyKeyValue('PAYMENT_METHOD', 'ID_Payment', $invoice['ID_Payment']);
+                                            $payment_method = $payment['data']['PaymentMethod'];
+                                        ?>
+                                        <th class="text-column" scope="row"><?php echo $payment_method?></th>
                                         <th class="text-column" scope="row"><?php echo $invoice['Total']?></th> 
                                         <?php
                                             $invoice_time = $invoice['InvoiceTime']->format(' H:i:s Y-m-d');

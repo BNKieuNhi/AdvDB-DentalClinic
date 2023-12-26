@@ -95,7 +95,7 @@ $info = getbyKeyValue('USER_DENTAL','ID_User', $_SESSION['auth_user']['id']);
                                         <div class="form-small">
                                             <div class="form-col margin-0">
                                                 <label for="" class="form-col__label">Password</label>
-                                                <input type="hidden" name="new_password" class="form-control">
+                                                <input type="password" name="new_password" class="form-control">
                                             </div>
 
                                             <br class="">
