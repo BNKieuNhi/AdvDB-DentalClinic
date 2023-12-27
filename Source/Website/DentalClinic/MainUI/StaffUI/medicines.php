@@ -25,10 +25,7 @@
                 <div class="container-recent">
                     <form action="" method="POST" class="container-recent-inner">
                         <div class="container-recent__heading heading__button">
-                            <a href="add_medicines.php" class="btn-control btn-control-add">
-                                <i class="fa-solid fa-pills btn-control-icon"></i>
-                                Add new medicine
-                            </a>
+                            <p class="recent__heading-title">Medicine List</p>
                             <div class="pagination">
                                 <?php
                                     $totalPages = ceil($medicines['total'] / $pageSize);
@@ -85,7 +82,6 @@
                                         <th class="text-column-emphasis" scope="col">Medicine Id</th> 
                                         <th class="text-column" scope="col">Medicine Name</th> 
                                         <th class="text-column" scope="col">Price ($)</th> 
-                                        <th class="text-column" scope="col">Action</th> 
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -103,15 +99,6 @@
                                         <th class="text-column-emphasis" scope="row"><?php echo $medicine['ID']?></th>
                                         <th class="text-column" scope="row"><?php echo $medicine['MedicineName']?></th>
                                         <th class="text-column" scope="row"><?php echo $medicine['Price']?></th> 
- 
-                                        <th class="text-column" scope="row">
-                                            <div class="text-column__action">
-                                                <a href="update_medicines.php?id=<?php  echo $medicine['ID_Medicine']?>" class="btn-control btn-control-edit">
-                                                    <i class="fa-solid fa-pills btn-control-icon"></i>
-                                                    Update
-                                                </a>
-                                            </div>
-                                        </th> 
                                     </tr>
                                     <?php
                                         }

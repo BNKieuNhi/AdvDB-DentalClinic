@@ -93,7 +93,6 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                         <th class="text-column" scope="col">Phone Number</th> 
                                         <th class="text-column" scope="col">Address</th> 
                                         <th class="text-column" scope="col">Status</th>  
-                                        <th class="text-column" scope="col">ACTION</th> 
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -141,14 +140,6 @@ $staffs = getByUserTypeWithPagination('USER_DENTAL', 'Staff', $pageSize, $pageNu
                                             <?php
                                             }
                                         ?>  
-                                        <th class="text-column" scope="row">
-                                            <div class="text-column__action">
-                                                <a href="update_staffs.php?id=<?php  echo $staff['ID_User']?>" class="btn-control btn-control-edit">
-                                                    <i class="fa-solid fa-user-pen btn-control-icon"></i>
-                                                    Update
-                                                </a>
-                                            </div>
-                                        </th> 
                                     </tr>
                                     <?php
                                         }
