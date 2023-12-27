@@ -122,8 +122,8 @@ create table APPOINTMENT
 create table TOOTH_PROBLEM
 (
 	ID_Customer integer not null,
-	NoteDate datetime not null,
-	Descript nvarchar(50) not null default getdate(),
+	NoteDate datetime not null default getdate(),
+	Descript nvarchar(50) not null,
 
 	constraint PK_TOOTHPROBLEM
 	primary key (ID_Customer, NoteDate)
@@ -204,16 +204,6 @@ create table CHOOSE_TOOTH
 	constraint PK_CHOOSETOOTH
 	primary key (ID_Select, ID_Tooth, ID_Surface)
 );
-
-alter table CHOOSE_TOOTH
-add
-	constraint FK_CTOOTH_ST
-	foreign key (ID_Select)
-	references SELECT_TREATMENT (ID_Select),
-
-	constraint FK_CTOOTH_TOOTH
-	foreign key (ID_Tooth, ID_Surface)
-	references TOOTH (ID_Tooth, ID_Surface)
 
 -- TREATMENT --
 create table TREATMENT
@@ -344,6 +334,16 @@ add
 	constraint FK_PRESCRIBE_ST
 	foreign key (ID_Select)
 	references SELECT_TREATMENT (ID_Select)
+-- CHOOSE_TOOTH --	
+alter table CHOOSE_TOOTH
+add
+	constraint FK_CTOOTH_ST
+	foreign key (ID_Select)
+	references SELECT_TREATMENT (ID_Select),
+
+	constraint FK_CTOOTH_TOOTH
+	foreign key (ID_Tooth, ID_Surface)
+	references TOOTH (ID_Tooth, ID_Surface)
 -- CHOOSE_TREATMENT --
 alter table CHOOSE_TREATMENT
 add
