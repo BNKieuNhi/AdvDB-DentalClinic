@@ -111,7 +111,7 @@ $invoices = getTopInvoice('10');
                                 <thead class="thead-light">
                                     <tr>
                                     <th class="text-column-emphasis" scope="col">Invoice Id</th> 
-                                        <th class="text-column" scope="col">Select Treatment</th> 
+                                        <th class="text-column" scope="col">Treatment Plan</th> 
                                         <th class="text-column" scope="col">Payment Id</th> 
                                         <th class="text-column" scope="col">Total ($)</th> 
                                         <th class="text-column" scope="col">Time</th> 

@@ -27,7 +27,7 @@ $rooms = getAll('ROOM');
                         </div>
                         
                         <div class="container-recent__body card__body-form">
-                            <form method="POST" action="../../../Controller/AdminController/add_appointment.php">
+                            <form method="POST" action="../../Controller/AdminController/add_appointment.php">
                                 <div class="form-row">
                                     <div class="form-row__flex">
                                         <div class="form-col">

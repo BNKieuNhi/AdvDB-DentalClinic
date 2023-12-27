@@ -222,7 +222,7 @@
 
         $query = "SELECT TOP $count *
                 FROM APPOINTMENT
-                ORDER BY Date_Appt, Time_Appt;";
+                ORDER BY Date_Appt DESC, Time_Appt DESC";
         $result = sqlsrv_query($conn, $query);
     
         if ($result) {
