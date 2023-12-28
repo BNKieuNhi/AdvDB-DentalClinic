@@ -7,6 +7,10 @@ $payment_id = $invoice['data']['ID_Payment'];
 $payment = getbyKeyValue('PAYMENT_METHOD', 'ID_Payment', $payment_id);
 
 $select_id = $invoice['data']['ID_Select'];
+$selects = getbyKeyValue('SELECT_TREATMENT', 'ID_Select', $select_id);
+$customers = getbyKeyValue('CUSTOMER', 'ID_Customer', $selects['data']['ID_Customer']);
+$customer_name = $customers['data']['Fullname'];
+
 $prescribes = getAllByKeyValue('PRESCRIBE', 'ID_Select', $select_id);
 $choose_tooths = getAllByKeyValue('CHOOSE_TOOTH', 'ID_Select', $select_id);
 $choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_id);
@@ -42,6 +46,11 @@ $choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_i
                                             <h3 name="select_id" class="form-control margin-0"><?php echo $select_id?></h3>
                                         </div>
 
+                                        <div class="form-col">
+                                            <label for="" class="form-col__label">Medicine Price ($)</label>
+                                            <h3 name="medicine_price" class="form-control margin-0"><?php echo $invoice['data']['MedicineFee']?></h3>
+                                        </div>
+                                        
                                         <div class="form-col">
                                             <label for="" class="form-col__label">Payment</label>
                                             <h3 name="payment_id" class="form-control margin-0"><?php echo $payment['data']['PaymentMethod']?></h3>
@@ -220,6 +229,7 @@ $choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_i
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-column-emphasis" scope="col">Treatment Id</th> 
+                                        <th class="text-column" scope="col">Treatment Name</th> 
                                         <th class="text-column" scope="col">Price ($)</th> 
                                     </tr>
                                 </thead>
@@ -237,6 +247,10 @@ $choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_i
                                         ?>
                                     <tr>
                                         <th class="text-column-emphasis" scope="row"><?php echo $choose_treatment['ID_Treatment']?></th> 
+                                        <?php 
+                                            $treatments = getbyKeyValue('TREATMENT', 'ID_Treatment', $choose_treatment['ID_Treatment'])
+                                        ?>
+                                        <th class="text-column" scope="row"><?php echo $treatments['data']['TreatmentName']?></th> 
                                         <th class="text-column" scope="row"><?php echo $choose_treatment['Price']?></th> 
                                     </tr>
                                     <?php

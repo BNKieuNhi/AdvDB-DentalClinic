@@ -24,11 +24,8 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
             <div class="container">
                 <div class="container-recent">
                     <form action="" method="POST" class="container-recent-inner">
-                        <div class="container-recent__heading heading__button">
-                            <a href="add_invoices.php" class="btn-control btn-control-add">
-                                <i class="fa-solid fa-file-invoice btn-control-icon"></i>
-                                Add new invoice
-                            </a>
+                        <div class="container-recent__heading">
+                            <p class="recent__heading-title">Invoice List</p>
                             
                             <div class="pagination">
                                 <?php
@@ -90,6 +87,7 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                                     <tr>
                                         <th class="text-column-emphasis" scope="col">Invoice Id</th> 
                                         <th class="text-column" scope="col">Select Treatment</th> 
+                                        <th class="text-column" scope="col">Patient Name</th>                                         
                                         <th class="text-column" scope="col">Payment</th> 
                                         <th class="text-column" scope="col">Total ($)</th> 
                                         <th class="text-column" scope="col">Time</th> 
@@ -110,9 +108,13 @@ $invoices = getAllWithPagination('INVOICE', $pageSize, $pageNumber, 'ID_Invoice'
                                         <th class="text-column-emphasis" scope="row"><?php echo $invoice['ID']?></th>
                                         <th class="text-column" scope="row"><?php echo $invoice['ID_Select']?></th>
                                         <?php
+                                            $selects = getbyKeyValue('SELECT_TREATMENT', 'ID_Select', $invoice['ID_Select']);
+                                            $customers = getbyKeyValue('CUSTOMER', 'ID_Customer', $selects['data']['ID_Customer']);
+                                            $customer_name = $customers['data']['Fullname'];
                                             $payment = getbyKeyValue('PAYMENT_METHOD', 'ID_Payment', $invoice['ID_Payment']);
                                             $payment_method = $payment['data']['PaymentMethod'];
                                         ?>
+                                        <th class="text-column" scope="row"><?php echo $customer_name?></th>
                                         <th class="text-column" scope="row"><?php echo $payment_method?></th>
                                         <th class="text-column" scope="row"><?php echo $invoice['Total']?></th> 
                                         <?php

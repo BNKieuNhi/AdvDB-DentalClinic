@@ -24,11 +24,8 @@ $appointments = getAllWithPagination('APPOINTMENT', $pageSize, $pageNumber, 'ID_
             <div class="container">
                 <div class="container-recent">
                     <form action="" method="POST" class="container-recent-inner">
-                        <div class="container-recent__heading heading__button">
-                            <a href="add_appointments.php" class="btn-control btn-control-add">
-                                <i class="fa-regular fa-calendar-plus btn-control-icon"></i>
-                                Add new appointment
-                            </a>
+                        <div class="container-recent__heading">
+                            <p class="recent__heading-title">Appointment List</p>
 
                             <div class="pagination">
                                 <?php
@@ -90,7 +87,6 @@ $appointments = getAllWithPagination('APPOINTMENT', $pageSize, $pageNumber, 'ID_
                                         <th class="text-column" scope="col">Time</th> 
                                         <th class="" scope="col"></th> 
                                         <th class="text-column" scope="col">Status</th> 
-                                        <th class="text-column" scope="col">ACTIONS</th> 
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -133,19 +129,6 @@ $appointments = getAllWithPagination('APPOINTMENT', $pageSize, $pageNumber, 'ID_
                                             <?php
                                             }
                                         ?>
-                                        <th class="text-column" scope="row">
-                                            <div class="text-column__action">
-                                                <a href="../../Controller/DentistController/delete_appointment.php?id=<?php  echo $appointment['ID_Appointment']?>" 
-                                                    class="btn-control btn-control-delete">
-                                                        <i class="fa-solid fa-trash-can btn-control-icon"></i>
-                                                        Delete
-                                                    </a>
-                                                <a href="update_appointments.php?id=<?php  echo $appointment['ID_Appointment']?>" class="btn-control btn-control-edit">
-                                                    <i class="fa-solid fa-calendar-day btn-control-icon"></i>
-                                                    Update
-                                                </a>
-                                            </div>
-                                        </th> 
                                     </tr>
                                     <?php
                                         }
