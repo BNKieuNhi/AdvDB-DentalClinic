@@ -35,12 +35,8 @@
                 $stmt = sqlsrv_query($conn, $sql);
                 $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
 
-                echo $sql;
-                print_r($row);
 
-                $count = sizeof($row);
-
-                if($count != 0)
+                if(sqlsrv_has_rows($stmt))
                 {
                     
                     $_SESSION['authenticated'] = true;
@@ -61,12 +57,10 @@
                         case 'Admin':
                             header("location: ../MainUI/AdminUI/dashboard.php");
                             exit(0);
-                        //case "Dentist":
-                        case "Nha si":
-                            header("location: ../MainUI/DentistUI/dentistHomepage.php");
+                        case "Dentist":
+                            header("location: ../MainUI/DentistUI/dashboard.php");
                             exit(0);
-                        //case "Staff":
-                        case "Nhan vien":
+                        case "Staff":
                             header("location: ../MainUI/StaffUI/dashboard.php");
                             exit(0);
                         default:
