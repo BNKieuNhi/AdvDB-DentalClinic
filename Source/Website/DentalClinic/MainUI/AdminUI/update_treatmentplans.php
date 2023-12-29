@@ -10,6 +10,7 @@ $customer = getbyKeyValue('CUSTOMER', 'ID_Customer', $select['data']['ID_Custome
 
 $choose_tooths = getAllByKeyValue('CHOOSE_TOOTH', 'ID_Select', $select_id);
 $choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_id);
+$prescribes = getAllByKeyValue('PRESCRIBE', 'ID_Select', $select_id);
 ?>
 
 <body>
@@ -234,6 +235,71 @@ $choose_treatments = getAllByKeyValue('CHOOSE_TREATMENT', 'ID_Select', $select_i
                                         <th class="text-column" scope="row">
                                             <div class="text-column__action">
                                             <a href="../../Controller/AdminController/delete_chooseTreatment.php?id=<?php echo $choose_treatment['ID_Select'];?>&treatment_id=<?php echo $choose_treatment['ID_Treatment'];?>" 
+                                                class="btn-control btn-control-delete">
+                                                    <i class="fa-solid fa-trash-can btn-control-icon"></i>
+                                                    Delete
+                                                </a>
+                                            </div>
+                                        </th> 
+                                    </tr>
+                                    <?php
+                                        }
+                                    }
+                                    else
+                                    {?>
+                                    <th class="text-column" scope="row"><?php echo 'No Data Found'?></th> 
+                                    <?php    
+                                    }
+                                ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prescribe -->
+            <div class="container">
+                <div class="container-recent">
+                    <div class="container-recent-inner">
+                        <div class="container-recent__heading">
+                            <p class="recent__heading-title">Prescribe</p>
+                            <a href="add_prescribes.php?id=<?php echo $select_id?>" class="btn-control btn-control-add">
+                                <i class="fa-solid fa-pills btn-control-icon"></i>
+                                Add prescribe
+                            </a>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="text-column-emphasis" scope="col">Select Id</th> 
+                                        <th class="text-column-emphasis" scope="col">Medicine Id</th> 
+                                        <th class="text-column" scope="col">Quantity</th> 
+                                        <th class="text-column" scope="col">Unit Price ($)</th> 
+                                        <th class="text-column" scope="col">Total Price ($)</th> 
+                                        <th class="text-column" scope="col">Action</th> 
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body">
+                                <?php
+                                    if($prescribes['status'] != 'No Data Found')
+                                    {
+                                    ?>
+                                        <?php  foreach($prescribes['data'] as $prescribe) 
+                                        {  
+                                        ?>
+                                    <tr>
+                                        <th class="text-column-emphasis" scope="row"><?php echo $prescribe['ID_Select']?></th> 
+                                        <th class="text-column-emphasis" scope="row"><?php echo $prescribe['ID_Medicine']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $prescribe['Quantity']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $prescribe['UnitPrice']?></th> 
+                                        <th class="text-column" scope="row"><?php echo $prescribe['TotalPrice']?></th> 
+                                        <th class="text-column" scope="row">
+                                            <div class="text-column__action">
+                                            <a href="../../Controller/AdminController/delete_prescribe.php?id=<?php echo $prescribe['ID_Select'];?>&medicine_id=<?php echo $prescribe['ID_Medicine'];?>" 
                                                 class="btn-control btn-control-delete">
                                                     <i class="fa-solid fa-trash-can btn-control-icon"></i>
                                                     Delete
