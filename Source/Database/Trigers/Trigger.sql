@@ -30,7 +30,7 @@ begin
 	where ID_Select = @id_select and ID_Medicine = @id_medicine
 end
 go
-drop trigger tg_add_Total_INVOICE
+
 create trigger tg_add_Total_INVOICE on INVOICE
 after insert
 as
