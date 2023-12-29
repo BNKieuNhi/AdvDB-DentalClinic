@@ -35,10 +35,10 @@ create table USER_DENTAL
 	primary key (ID_User),
 
 	constraint CK_USER_Gender
-	check (Gender = 'Nam' or Gender = N'Nữ'),
+	check (Gender = 'M' or Gender = 'F'),
 
 	constraint CK_USER_UserType
-	check (UserType = N'Nha sĩ' or UserType = N'Nhân viên' or UserType = 'Admin'),
+	check (UserType = 'Dentist' or UserType = 'Staff' or UserType = 'Admin'),
 );
 
 -- ADMIN --
@@ -83,7 +83,7 @@ create table CUSTOMER
 	primary key (ID_Customer),
 
 	constraint CK_CUSTOMER_Gender
-	check (Gender = 'Nam' or Gender = N'Nữ')
+	check (Gender = 'M' or Gender = 'F')
 );
 
 -- ROOM --
@@ -109,13 +109,13 @@ create table APPOINTMENT
 	ID_Room char(5) not null,
 	Date_Appt date not null,
 	Time_Appt time not null,
-	Status_Appt nvarchar(8) not null,
+	Status_Appt nvarchar(10) not null,
 
 	constraint PK_APPOINTMENT
 	primary key (ID_Appointment),
 
 	constraint CK_APPT_Status
-	check (Status_Appt = N'Mới' or Status_Appt = N'Tái khám')
+	check (Status_Appt = 'New' or Status_Appt ='Reassess')
 );
 
 -- TOOTH PROBLEM --
@@ -159,15 +159,15 @@ create table SELECT_TREATMENT
 	ID_Customer integer not null,
 	DateSelect datetime not null,
 	ReturnDays integer,
-	SelectionStatus nvarchar(13) not null default N'Kế hoạch',
+	SelectionStatus nvarchar(13) not null default N'Planning',
 	Note nvarchar(50),
 
 	constraint PK_SELECTTREATMENT
 	primary key (ID_Select),
 
 	constraint CK_ST_SelectionStatus
-	check (SelectionStatus = N'Kế hoạch' or SelectionStatus = N'Đã hoàn thành' 
-		or SelectionStatus = N'Đã hủy')
+	check (SelectionStatus = 'Planning' or SelectionStatus = 'Completed' 
+		or SelectionStatus = 'Canceled')
 );
 
 -- PRESCRIBE --
@@ -204,6 +204,16 @@ create table CHOOSE_TOOTH
 	constraint PK_CHOOSETOOTH
 	primary key (ID_Select, ID_Tooth, ID_Surface)
 );
+
+alter table CHOOSE_TOOTH
+add
+	constraint FK_CTOOTH_ST
+	foreign key (ID_Select)
+	references SELECT_TREATMENT (ID_Select),
+
+	constraint FK_CTOOTH_TOOTH
+	foreign key (ID_Tooth, ID_Surface)
+	references TOOTH (ID_Tooth, ID_Surface)
 
 -- TREATMENT --
 create table TREATMENT
@@ -334,16 +344,6 @@ add
 	constraint FK_PRESCRIBE_ST
 	foreign key (ID_Select)
 	references SELECT_TREATMENT (ID_Select)
--- CHOOSE_TOOTH --	
-alter table CHOOSE_TOOTH
-add
-	constraint FK_CTOOTH_ST
-	foreign key (ID_Select)
-	references SELECT_TREATMENT (ID_Select),
-
-	constraint FK_CTOOTH_TOOTH
-	foreign key (ID_Tooth, ID_Surface)
-	references TOOTH (ID_Tooth, ID_Surface)
 -- CHOOSE_TREATMENT --
 alter table CHOOSE_TREATMENT
 add
@@ -364,3 +364,9 @@ add
 	constraint FK_INVOICE_PAYMENT
 	foreign key (ID_Payment)
 	references PAYMENT_METHOD (ID_Payment)
+CREATE LOGIN KIEUNHI WITH PASSWORD = 'KIEUNHI'
+Create User KIEUNHI For Login KIEUNHI 
+ALTER ROLE [db_datawriter] ADD MEMBER KIEUNHI
+ALTER ROLE [db_datareader] ADD MEMBER KIEUNHI
+ALTER ROLE [db_securityadmin] ADD MEMBER KIEUNHI
+select * from APPOINTMENT
